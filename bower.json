@@ -1,0 +1,25 @@
+{
+  "name": "ejder.be",
+  "version": "0.0.1",
+  "homepage": "https://github.com/eyurdakul/ejder.be",
+  "authors": [
+    "Ejder Yurdakul"
+  ],
+  "description": "my personal site",
+  "main": "index.html",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "license": "Artictic License 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
