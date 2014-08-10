@@ -1,45 +1,60 @@
 module.exports = (grunt)->
   grunt.initConfig
     pkg: grunt.file.readJSON "package.json"
-
     watch:
+      clean:
+        files: ["**/*.coffee", "**/*.scss"]
+        tasks: ["clean"]
       coffee:
-        files: "src/scripts/*.coffee"
+        files: "**/*.coffee"
         tasks: ["coffee:compile"]
       compass:
-        files: "src/styles/*.scss"
+        files: "**/*.scss"
         tasks: ["compass"]
-    coffee: [
-              (
-               expand: true
-               flatten: true
-               cwd: "#{__dirname}/src/"
-               src: ["*.coffee"]
-               dest: "scripts/"
-               ext: ".js"
-              )
-            ]
+      cssmin:
+        files: ["**/*.scss"]
+        tasks: ["cssmin"]
+      uglify:
+        files: ["**/*.coffee"]
+        tasks: ["uglify"]
+    clean: ["#{__dirname}/styles", "#{__dirname}/scripts", "#{__dirname}/public"]
+    coffee:
+      compile:
+        files:
+          "Gruntfile.js": "src/Gruntfile.coffee"
+          "public/server.js": "src/server.coffee"
+          "scripts/app.js":["src/scripts/*.coffee"]
     compass:
       dist:
         options:
           sassDir: "#{__dirname}/src/styles/"
           cssDir: "#{__dirname}/styles/"
-    bowercopy:
-      options:
-        srcPrefix: "bower_components"
-      script:
-        options:
-          destPrefix: "scripts/vendor"
+    cssmin:
+      build:
+        files:
+          "styles/min/main.min.css":["#{__dirname}/styles/*.css"]
+    uglify:
+      dist:
+        files:
+          "scripts/min/app.min.js":["#{__dirname}/scripts/*.js"]
     connect:
-      options:
-        port: 8080
-        open: true
-        hostname: "localhost"
+      server:
+        options:
+          port: 8080
+          hostname: "*"
+          base: "./public"
+          livereload: true
+          onCreateServer: (server, connect, options)->
+            watchdog = require "./public/server.js"
+            watchdog.listen 8000
+            grunt.log.writeln "Listening port "+options.port
 
+  grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-compass"
-  grunt.loadNpmTasks "grunt-contrib-watch"
+  grunt.loadNpmTasks "grunt-contrib-cssmin"
+  grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-contrib-connect"
-  grunt.loadNpmTasks "grunt-bowercopy"
-  grunt.registerTask "default", ["coffee", "compass", "bowercopy", "watch", "connect"]
+  grunt.loadNpmTasks "grunt-contrib-watch"
+  grunt.registerTask "default", ["clean", "coffee", "compass", "cssmin", "uglify", "connect", "watch"]
   return
