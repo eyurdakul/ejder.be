@@ -1,0 +1,1 @@
+console.log "data file is generated"
