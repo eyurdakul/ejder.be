@@ -1,28 +1,40 @@
 http = require "http"
 jade = require "jade"
 
-class Site
+class Router
   data:
+    constants:
+      DEFAULT_ENCODING: "UTF8"
+      DEFAULT_ROUTE: "/index"
+      MAIN_TEMPLATE: "index.jade"
+      ROOT: "/"
+      REQ_TYPE_AJAX: "x-requested-with"
+      REQ_VAL_AJAX: "XMLHttpRequest"
     options:
       tempPath: "src/templates/"
-      tempExt: ".jade"
     jade:
       pretty: true
       title: "Ejder Yurdakul 2014"
 
-  constructor: (route)->
-    @init route
+  constructor: (request, response)->
+    @request = request
+    @response = response
+    return @init()
+
+  init: ->
+    @request.setEncoding @data.constants.DEFAULT_ENCODING
+    if @isAjax()
+      #controller action
+    else
+      file = @data.options.tempPath+@data.constants.MAIN_TEMPLATE
+      @data.jade.route = @request.url.pathname
+      @response.end jade.renderFile file, @data.jade
     return
 
-  init: (route)->
-    file = @data.options.tempPath+route+@data.options.tempExt
-    @response = jade.renderFile file, @data.jade
-    return
+  isAjax: ->
+    (@request.headers?[@data.constants.REQ_TYPE_AJAX]? == @data.constants.REQ_VAL_AJAX)
 
 onHttpRequest = (request, response)->
-  response.writeHead 200, "Content-Type":"text/html"
-  route = "index"
-  html = new Site route
-  response.end html.response
-  return
+  new Router request, response
+
 module.exports = http.createServer onHttpRequest

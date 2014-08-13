@@ -24,7 +24,7 @@
           tasks: ["uglify"]
         }
       },
-      clean: ["" + __dirname + "/styles", "" + __dirname + "/scripts", "" + __dirname + "/public"],
+      clean: ["" + __dirname + "/styles", "" + __dirname + "/scripts", "" + __dirname + "/public/server.js"],
       coffee: {
         compile: {
           files: {

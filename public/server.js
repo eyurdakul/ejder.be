@@ -1,15 +1,22 @@
 (function() {
-  var Site, http, jade, onHttpRequest;
+  var Router, http, jade, onHttpRequest;
 
   http = require("http");
 
   jade = require("jade");
 
-  Site = (function() {
-    Site.prototype.data = {
+  Router = (function() {
+    Router.prototype.data = {
+      constants: {
+        DEFAULT_ENCODING: "UTF8",
+        DEFAULT_ROUTE: "/index",
+        MAIN_TEMPLATE: "index.jade",
+        ROOT: "/",
+        REQ_TYPE_AJAX: "x-requested-with",
+        REQ_VAL_AJAX: "XMLHttpRequest"
+      },
       options: {
-        tempPath: "src/templates/",
-        tempExt: ".jade"
+        tempPath: "src/templates/"
       },
       jade: {
         pretty: true,
@@ -17,29 +24,35 @@
       }
     };
 
-    function Site(route) {
-      this.init(route);
-      return;
+    function Router(request, response) {
+      this.request = request;
+      this.response = response;
+      return this.init();
     }
 
-    Site.prototype.init = function(route) {
+    Router.prototype.init = function() {
       var file;
-      file = this.data.options.tempPath + route + this.data.options.tempExt;
-      this.response = jade.renderFile(file, this.data.jade);
+      this.request.setEncoding(this.data.constants.DEFAULT_ENCODING);
+      if (this.isAjax()) {
+
+      } else {
+        file = this.data.options.tempPath + this.data.constants.MAIN_TEMPLATE;
+        this.data.jade.route = this.request.url.pathname;
+        this.response.end(jade.renderFile(file, this.data.jade));
+      }
     };
 
-    return Site;
+    Router.prototype.isAjax = function() {
+      var _ref;
+      return (((_ref = this.request.headers) != null ? _ref[this.data.constants.REQ_TYPE_AJAX] : void 0) != null) === this.data.constants.REQ_VAL_AJAX;
+    };
+
+    return Router;
 
   })();
 
   onHttpRequest = function(request, response) {
-    var html, route;
-    response.writeHead(200, {
-      "Content-Type": "text/html"
-    });
-    route = "index";
-    html = new Site(route);
-    response.end(html.response);
+    return new Router(request, response);
   };
 
   module.exports = http.createServer(onHttpRequest);
