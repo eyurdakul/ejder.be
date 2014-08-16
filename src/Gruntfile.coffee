@@ -17,7 +17,7 @@ module.exports = (grunt)->
       cssmin:
         files: ["**/*.coffee", "**/*.scss"]
         tasks: ["cssmin"]
-    clean: ["#{__dirname}/public"]
+    clean: ["#{__dirname}/public/*"]
     coffee:
       compile:
         files:

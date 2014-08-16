@@ -24,7 +24,7 @@
           tasks: ["cssmin"]
         }
       },
-      clean: ["" + __dirname + "/public"],
+      clean: ["" + __dirname + "/public/*"],
       coffee: {
         compile: {
           files: {
