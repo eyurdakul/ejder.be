@@ -1,5 +1,7 @@
 http = require "http"
 jade = require "jade"
+url  = require "url"
+fs   = require "fs"
 
 class Router
   data:
@@ -7,6 +9,7 @@ class Router
       DEFAULT_ENCODING: "UTF8"
       DEFAULT_ROUTE: "/index"
       MAIN_TEMPLATE: "index.jade"
+      NOTFOUND_TEMPLATE: "404.jade"
       ROOT: "/"
       REQ_TYPE_AJAX: "x-requested-with"
       REQ_VAL_AJAX: "XMLHttpRequest"
@@ -26,9 +29,24 @@ class Router
     if @isAjax()
       #controller action
     else
-      file = @data.options.tempPath+@data.constants.MAIN_TEMPLATE
-      @data.jade.route = @request.url.pathname
-      @response.end jade.renderFile file, @data.jade
+      resolved_url = url.parse @request.url
+      route = resolved_url.pathname
+      switch route
+        when "/"
+          file = @data.options.tempPath+@data.constants.MAIN_TEMPLATE
+          @response.setHeader "Content-Type", "text/html"
+          @response.end jade.renderFile file, @data.jade
+        when "/css"
+          content = fs.readFileSync "#{__dirname}/styles/min/main.min.css"
+          @response.setHeader "Content-Type", "text/css"
+          @response.end content
+        when "/js"
+          content = fs.readFileSync "#{__dirname}/scripts/min/app.min.js"
+          @response.setHeader "Content-Type", "application/javascript"
+          @response.end content
+        else
+          file = @data.options.tempPath+@data.constants.NOTFOUND_TEMPLATE
+          @response.end jade.renderFile file, @data.jade
     return
 
   isAjax: ->

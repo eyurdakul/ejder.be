@@ -8,29 +8,29 @@
           tasks: ["clean"]
         },
         coffee: {
-          files: "**/*.coffee",
+          files: ["**/*.coffee", "**/*.scss"],
           tasks: ["coffee:compile"]
         },
+        uglify: {
+          files: ["**/*.coffee", "**/*.scss"],
+          tasks: ["uglify"]
+        },
         compass: {
-          files: "**/*.scss",
+          files: ["**/*.coffee", "**/*.scss"],
           tasks: ["compass"]
         },
         cssmin: {
-          files: ["**/*.scss"],
+          files: ["**/*.coffee", "**/*.scss"],
           tasks: ["cssmin"]
-        },
-        uglify: {
-          files: ["**/*.coffee"],
-          tasks: ["uglify"]
         }
       },
-      clean: ["" + __dirname + "/styles", "" + __dirname + "/scripts", "" + __dirname + "/public/server.js"],
+      clean: ["" + __dirname + "/public"],
       coffee: {
         compile: {
           files: {
             "Gruntfile.js": "src/Gruntfile.coffee",
             "public/server.js": "src/server.coffee",
-            "scripts/app.js": ["src/scripts/*.coffee"]
+            "public/scripts/app.js": ["src/scripts/*.coffee"]
           }
         }
       },
@@ -38,21 +38,21 @@
         dist: {
           options: {
             sassDir: "" + __dirname + "/src/styles/",
-            cssDir: "" + __dirname + "/styles/"
+            cssDir: "" + __dirname + "/public/styles/"
           }
         }
       },
       cssmin: {
         build: {
           files: {
-            "styles/min/main.min.css": ["" + __dirname + "/styles/*.css"]
+            "public/styles/min/main.min.css": ["" + __dirname + "/public/styles/*.css"]
           }
         }
       },
       uglify: {
         dist: {
           files: {
-            "scripts/min/app.min.js": ["" + __dirname + "/scripts/*.js"]
+            "public/scripts/min/app.min.js": ["" + __dirname + "/public/scripts/*.js"]
           }
         }
       },

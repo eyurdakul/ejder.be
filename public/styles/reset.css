@@ -1,0 +1,9 @@
+/* line 2, ../../src/styles/reset.scss */
+html * {
+  margin: 0;
+  padding: 0;
+}
+/* line 6, ../../src/styles/reset.scss */
+html h1 {
+  color: red;
+}
