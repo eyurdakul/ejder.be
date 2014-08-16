@@ -24,7 +24,7 @@
           tasks: ["cssmin"]
         }
       },
-      clean: ["" + __dirname + "/public/*"],
+      clean: ["" + __dirname + "/public/styles/*.css", "" + __dirname + "/public/styles/min/*.css", "" + __dirname + "/public/scripts/min/*.js", "" + __dirname + "/public/scripts/*.js", "" + __dirname + "/public/*.js"],
       coffee: {
         compile: {
           files: {
@@ -45,14 +45,16 @@
       cssmin: {
         build: {
           files: {
-            "public/styles/min/main.min.css": ["" + __dirname + "/public/styles/*.css"]
+            "public/styles/min/main.min.css": ["" + __dirname + "/public/styles/*.css"],
+            "public/styles/min/vendor.min.css": ["bower_components/bootstrap/dist/css/bootstrap.css"]
           }
         }
       },
       uglify: {
         dist: {
           files: {
-            "public/scripts/min/app.min.js": ["" + __dirname + "/public/scripts/*.js"]
+            "public/scripts/min/app.min.js": ["" + __dirname + "/public/scripts/*.js"],
+            "public/scripts/min/vendor.min.js": ["bower_components/jquery/dist/jquery.js", "bower_components/bootstrap/dist/js/bootstrap.js"]
           }
         }
       },

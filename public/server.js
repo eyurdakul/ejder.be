@@ -1,5 +1,5 @@
 (function() {
-  var Router, fs, http, jade, onHttpRequest, url;
+  var Router, http, jade, onHttpRequest, statics, url;
 
   http = require("http");
 
@@ -7,16 +7,14 @@
 
   url = require("url");
 
-  fs = require("fs");
+  statics = require("node-static");
 
   Router = (function() {
     Router.prototype.data = {
       constants: {
         DEFAULT_ENCODING: "UTF8",
-        DEFAULT_ROUTE: "/index",
         MAIN_TEMPLATE: "index.jade",
         NOTFOUND_TEMPLATE: "404.jade",
-        ROOT: "/",
         REQ_TYPE_AJAX: "x-requested-with",
         REQ_VAL_AJAX: "XMLHttpRequest"
       },
@@ -26,42 +24,33 @@
       jade: {
         pretty: true,
         title: "Ejder Yurdakul 2014"
-      }
+      },
+      paths: ["/", "/contact", "/blog", "/skills", "/experience"]
     };
 
     function Router(request, response) {
       this.request = request;
+      this.request.setEncoding(this.data.constants.DEFAULT_ENCODING);
       this.response = response;
+      this.fileServer = new statics.Server("./public");
       return this.init();
     }
 
     Router.prototype.init = function() {
-      var content, file, resolved_url, route;
-      this.request.setEncoding(this.data.constants.DEFAULT_ENCODING);
+      var content, file, pathIndex, resolved_url, route;
       if (this.isAjax()) {
 
       } else {
         resolved_url = url.parse(this.request.url);
         route = resolved_url.pathname;
-        switch (route) {
-          case "/":
-            file = this.data.options.tempPath + this.data.constants.MAIN_TEMPLATE;
-            this.response.setHeader("Content-Type", "text/html");
-            this.response.end(jade.renderFile(file, this.data.jade));
-            break;
-          case "/css":
-            content = fs.readFileSync("" + __dirname + "/styles/min/main.min.css");
-            this.response.setHeader("Content-Type", "text/css");
-            this.response.end(content);
-            break;
-          case "/js":
-            content = fs.readFileSync("" + __dirname + "/scripts/min/app.min.js");
-            this.response.setHeader("Content-Type", "application/javascript");
-            this.response.end(content);
-            break;
-          default:
-            file = this.data.options.tempPath + this.data.constants.NOTFOUND_TEMPLATE;
-            this.response.end(jade.renderFile(file, this.data.jade));
+        pathIndex = this.data.paths.indexOf(route);
+        if (pathIndex !== -1) {
+          file = this.data.options.tempPath + this.data.constants.MAIN_TEMPLATE;
+          this.data.jade.route = route;
+          content = jade.renderFile(file, this.data.jade);
+          this.response.end(content);
+        } else {
+          this.fileServer.serve(this.request, this.response);
         }
       }
     };
