@@ -1,11 +1,13 @@
 (function() {
-  var Router, http, jade, onHttpRequest, statics, url;
+  var Router, fs, http, jade, onHttpRequest, statics, url;
 
   http = require("http");
 
   jade = require("jade");
 
   url = require("url");
+
+  fs = require("fs");
 
   statics = require("node-static");
 
@@ -50,7 +52,13 @@
           content = jade.renderFile(file, this.data.jade);
           this.response.end(content);
         } else {
-          this.fileServer.serve(this.request, this.response);
+          if (fs.existsSync(__dirname + route)) {
+            this.fileServer.serve(this.request, this.response);
+          } else {
+            file = this.data.options.tempPath + this.data.constants.NOTFOUND_TEMPLATE;
+            content = jade.renderFile(file, this.data.jade);
+            this.response.end(content);
+          }
         }
       }
     };

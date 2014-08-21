@@ -1,6 +1,7 @@
 http = require "http"
 jade = require "jade"
 url  = require "url"
+fs = require "fs"
 statics = require "node-static"
 
 class Router
@@ -39,7 +40,12 @@ class Router
         content = jade.renderFile file, @data.jade
         @response.end content
       else
-        @fileServer.serve @request, @response
+        if fs.existsSync __dirname+route
+          @fileServer.serve @request, @response
+        else
+          file = @data.options.tempPath+@data.constants.NOTFOUND_TEMPLATE
+          content = jade.renderFile file, @data.jade
+          @response.end content
     return
 
   isAjax: ->
