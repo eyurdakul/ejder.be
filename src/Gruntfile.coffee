@@ -45,7 +45,6 @@ module.exports = (grunt)->
           port: 8080
           hostname: "*"
           base: "./public"
-          livereload: true
           onCreateServer: (server, connect, options)->
             watchdog = require "./public/server.js"
             watchdog.listen 8000
