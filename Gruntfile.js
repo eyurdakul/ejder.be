@@ -64,7 +64,6 @@
             port: 8080,
             hostname: "*",
             base: "./public",
-            livereload: true,
             onCreateServer: function(server, connect, options) {
               var watchdog;
               watchdog = require("./public/server.js");
