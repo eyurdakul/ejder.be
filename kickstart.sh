@@ -1,3 +1,5 @@
-#!/bin/bash
-echo "starting ejder.be"
-grunt
+#!/bin/sh
+CMD="grunt"
+CMD+="$@"
+echo $CMD
+$CMD
