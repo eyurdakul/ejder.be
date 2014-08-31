@@ -1,5 +1,5 @@
 #!/bin/sh
-CMD="grunt staging server:local "
+CMD="grunt"
 CMD+="$@"
 echo $CMD
 $CMD
