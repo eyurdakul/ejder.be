@@ -1,3 +1,5 @@
-#!/bin/bash
-echo "starting ejder.be"
-grunt
+#!/bin/sh
+CMD="grunt staging server:local "
+CMD+="$@"
+echo $CMD
+$CMD
