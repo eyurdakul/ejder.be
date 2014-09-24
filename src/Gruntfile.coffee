@@ -38,7 +38,17 @@ module.exports = (grunt)->
       dist:
         files:
           "public/scripts/min/app.min.js":["#{__dirname}/public/scripts/*.js"]
-          "public/scripts/min/vendor.min.js":["bower_components/jquery/dist/jquery.js", "bower_components/bootstrap/dist/js/bootstrap.js"]
+          "public/scripts/min/vendor.min.js":["bower_components/jquery/dist/jquery.js", "bower_components/bootstrap/dist/js/bootstrap.js", "bower_components/modernizr/modernizr.js"]
+    spritely:
+      dist:
+        options:
+          destCSS: "#{__dirname}/public/styles/sprite.css"
+          algorithm: "binary-tree"
+          engine: "phantomjs"
+        files:[
+          src: ["#{__dirname}/src/assets/*.png"]
+          dest: "#{__dirname}/public/assets/sprite/sprite.png"
+        ]
     connect:
       server:
         options:
@@ -55,7 +65,8 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-contrib-compass"
   grunt.loadNpmTasks "grunt-contrib-cssmin"
   grunt.loadNpmTasks "grunt-contrib-uglify"
+  grunt.loadNpmTasks "grunt-spritely"
   grunt.loadNpmTasks "grunt-contrib-connect"
   grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.registerTask "default", ["clean", "coffee", "compass", "cssmin", "uglify", "connect", "watch"]
+  grunt.registerTask "default", ["clean", "coffee", "compass", "spritely", "cssmin", "uglify", "connect", "watch"]
   return

@@ -1,0 +1,18 @@
+.icon-image1 {
+  background-image: url(../assets/sprite/sprite.png);
+  background-position: 0px 0px;
+  width: 200px;
+  height: 150px;
+}
+.icon-image2 {
+  background-image: url(../assets/sprite/sprite.png);
+  background-position: -200px 0px;
+  width: 200px;
+  height: 150px;
+}
+.icon-image3 {
+  background-image: url(../assets/sprite/sprite.png);
+  background-position: 0px -150px;
+  width: 200px;
+  height: 150px;
+}
