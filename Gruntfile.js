@@ -7,6 +7,10 @@
           files: ["**/*.coffee", "**/*.scss"],
           tasks: ["clean"]
         },
+        copy: {
+          files: ["**/*.coffee", "**/*.scss"],
+          tasks: ["copy"]
+        },
         coffee: {
           files: ["**/*.coffee", "**/*.scss"],
           tasks: ["coffee:compile"]
@@ -24,7 +28,34 @@
           tasks: ["cssmin"]
         }
       },
-      clean: ["" + __dirname + "/public/styles/*.css", "" + __dirname + "/public/styles/min/*.css", "" + __dirname + "/public/scripts/min/*.js", "" + __dirname + "/public/scripts/*.js", "" + __dirname + "/public/*.js"],
+      clean: ["" + __dirname + "/public/*"],
+      copy: {
+        dist: {
+          files: [
+            {
+              expand: true,
+              filter: "isFile",
+              src: ["" + __dirname + "/src/assets/content/*"],
+              dest: "" + __dirname + "/public/assets/content/*"
+            }, {
+              expand: true,
+              filter: "isFile",
+              src: ["" + __dirname + "/src/assets/fonts/*"],
+              dest: "" + __dirname + "/public/assets/fonts/*"
+            }, {
+              expand: true,
+              filter: "isFile",
+              src: ["" + __dirname + "/src/assets/includes/*"],
+              dest: "" + __dirname + "/public/assets/includes/*"
+            }, {
+              expand: true,
+              filter: "isFile",
+              src: ["" + __dirname + "/src/assets/vectoral/*"],
+              dest: "" + __dirname + "/public/assets/vectoral/*"
+            }
+          ]
+        }
+      },
       coffee: {
         compile: {
           files: {
@@ -67,7 +98,7 @@
           },
           files: [
             {
-              src: ["" + __dirname + "/src/assets/*.png"],
+              src: ["" + __dirname + "/src/assets/sprite/*.png"],
               dest: "" + __dirname + "/public/assets/sprite/sprite.png"
             }
           ]
@@ -90,6 +121,7 @@
       }
     });
     grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-coffee");
     grunt.loadNpmTasks("grunt-contrib-compass");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
@@ -97,7 +129,7 @@
     grunt.loadNpmTasks("grunt-spritely");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.registerTask("default", ["clean", "coffee", "compass", "spritely", "cssmin", "uglify", "connect", "watch"]);
+    grunt.registerTask("default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "connect", "watch"]);
   };
 
 }).call(this);

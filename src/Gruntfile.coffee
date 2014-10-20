@@ -5,6 +5,9 @@ module.exports = (grunt)->
       clean:
         files: ["**/*.coffee", "**/*.scss"]
         tasks: ["clean"]
+      copy:
+        files: ["**/*.coffee", "**/*.scss"]
+        tasks: ["copy"]
       coffee:
         files: ["**/*.coffee", "**/*.scss"]
         tasks: ["coffee:compile"]
@@ -17,7 +20,35 @@ module.exports = (grunt)->
       cssmin:
         files: ["**/*.coffee", "**/*.scss"]
         tasks: ["cssmin"]
-    clean: ["#{__dirname}/public/styles/*", "#{__dirname}/public/scripts/*", "#{__dirname}/public/*.js"]
+    clean: ["#{__dirname}/public/*"]
+    copy:
+      dist:
+        files: [
+          (
+            expand: true
+            filter: "isFile"
+            src: ["#{__dirname}/src/assets/content/*"]
+            dest: "#{__dirname}/public/assets/content/*"
+          )
+          (
+            expand: true
+            filter: "isFile"
+            src: ["#{__dirname}/src/assets/fonts/*"]
+            dest: "#{__dirname}/public/assets/fonts/*"
+          )
+          (
+            expand: true
+            filter: "isFile"
+            src: ["#{__dirname}/src/assets/includes/*"]
+            dest: "#{__dirname}/public/assets/includes/*"
+          )
+          (
+            expand: true
+            filter: "isFile"
+            src: ["#{__dirname}/src/assets/vectoral/*"]
+            dest: "#{__dirname}/public/assets/vectoral/*"
+          )
+        ]
     coffee:
       compile:
         files:
@@ -46,7 +77,7 @@ module.exports = (grunt)->
           algorithm: "binary-tree"
           engine: "phantomjs"
         files:[
-          src: ["#{__dirname}/src/assets/*.png"]
+          src: ["#{__dirname}/src/assets/sprite/*.png"]
           dest: "#{__dirname}/public/assets/sprite/sprite.png"
         ]
     connect:
@@ -61,6 +92,7 @@ module.exports = (grunt)->
             grunt.log.writeln "Listening port "+options.port
 
   grunt.loadNpmTasks "grunt-contrib-clean"
+  grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-compass"
   grunt.loadNpmTasks "grunt-contrib-cssmin"
@@ -68,5 +100,5 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-spritely"
   grunt.loadNpmTasks "grunt-contrib-connect"
   grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.registerTask "default", ["clean", "coffee", "compass", "spritely", "cssmin", "uglify", "connect", "watch"]
+  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "connect", "watch"]
   return
