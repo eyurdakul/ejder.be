@@ -15,10 +15,6 @@
           files: ["**/*.coffee", "**/*.scss"],
           tasks: ["coffee:compile"]
         },
-        uglify: {
-          files: ["**/*.coffee", "**/*.scss"],
-          tasks: ["uglify"]
-        },
         compass: {
           files: ["**/*.coffee", "**/*.scss"],
           tasks: ["compass"]
@@ -26,32 +22,21 @@
         cssmin: {
           files: ["**/*.coffee", "**/*.scss"],
           tasks: ["cssmin"]
+        },
+        uglify: {
+          files: ["**/*.coffee", "**/*.scss"],
+          tasks: ["uglify"]
         }
       },
       clean: ["" + __dirname + "/public/*"],
       copy: {
-        dist: {
+        main: {
           files: [
             {
               expand: true,
-              filter: "isFile",
-              src: ["" + __dirname + "/src/assets/content/*"],
-              dest: "" + __dirname + "/public/assets/content/*"
-            }, {
-              expand: true,
-              filter: "isFile",
-              src: ["" + __dirname + "/src/assets/fonts/*"],
-              dest: "" + __dirname + "/public/assets/fonts/*"
-            }, {
-              expand: true,
-              filter: "isFile",
-              src: ["" + __dirname + "/src/assets/includes/*"],
-              dest: "" + __dirname + "/public/assets/includes/*"
-            }, {
-              expand: true,
-              filter: "isFile",
-              src: ["" + __dirname + "/src/assets/vectoral/*"],
-              dest: "" + __dirname + "/public/assets/vectoral/*"
+              cwd: "" + __dirname + "/src/media/",
+              src: ["*", "**"],
+              dest: "" + __dirname + "/public/media/"
             }
           ]
         }
@@ -98,8 +83,8 @@
           },
           files: [
             {
-              src: ["" + __dirname + "/src/assets/sprite/*.png"],
-              dest: "" + __dirname + "/public/assets/sprite/sprite.png"
+              src: ["" + __dirname + "/src/sprite/*.png"],
+              dest: "" + __dirname + "/public/sprite/sprite.png"
             }
           ]
         }

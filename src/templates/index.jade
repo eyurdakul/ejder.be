@@ -2,6 +2,15 @@ doctype "html"
 html(lang="en")
     include partials/head
     body
-        .viewport
-            h1 you're on index
+        header
+        section.viewport
+            article("id"="intro")
+                h1 you are on index!
+                p some text
+                a(href="#") this is a link
+                ul
+                    li first element
+                    li second element
+                    li last element
+        footer
         include partials/scripts
