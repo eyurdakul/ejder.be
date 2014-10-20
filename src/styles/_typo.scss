@@ -1,0 +1,6 @@
+body{
+  h1, h2, h3, h4, h5, h6{
+    text-rendering: optimizeLegibility;
+    //@include fontify('Gill Sans', 'Gill-Sans-MT-Pro-Light', 200);
+  }
+}
