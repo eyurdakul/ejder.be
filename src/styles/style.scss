@@ -1,0 +1,21 @@
+html{
+  body{
+    header{
+
+    }
+    section{
+      article{
+        a{
+          text-decoration: none;
+          //@include transition(all $animation-duration $animation-easing);
+          &:hover{
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    footer{
+
+    }
+  }
+}

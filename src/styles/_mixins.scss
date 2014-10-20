@@ -1,13 +1,41 @@
-@mixin fontify($font-family, $font-file, $font-weight:normal, $font-style: normal, $font-stretch: normal){
-  @font-face {
+@mixin breakpoint($point){
+  @if $point == desktop{
+    @media (min-width: $screen-lg){
+      @content;
+    }
+  }
+  @else if $point == tablet{
+    @media (min-width: $screen-md){
+      @content;
+    }
+  }
+  @else if $point == phablet{
+    @media (min-width: $screen-sm){
+      @content;
+    }
+  }
+  @else if $point == phone{
+    @media (max-width: $screen-sm){
+      @content;
+    }
+  }
+}
+@mixin fontify($font-name, $font-family, $font-weight:normal, $font-style: normal, $font-stretch: normal){
+  @font-face{
     font-family: "#{$font-family}";
-    src: url(font-path('#{$font-filename}.eot'));
-    src: url(font-path('#{$font-filename}.eot?#iefix')) format('embedded-opentype'),
-    url(font-path('#{$font-filename}.woff')) format('woff'),
-    url(font-path('#{$font-filename}.ttf')) format('truetype'),
-    url(font-path('#{$font-filename}.svg##{$font-family}')) format('svg');
+    src: url("#{$font-path}#{$font-name}/#{$font-name}.eot");
+    src: url("#{$font-path}#{$font-name}/#{$font-name}.eot?#iefix") format("embedded-opentype"),
+    url("#{$font-path}#{$font-name}/#{$font-name}.woff") format("woff"),
+    url("#{$font-path}#{$font-name}/#{$font-name}.ttf") format("truetype"),
+    url("#{$font-path}#{$font-name}/#{$font-name}.svg##{$font-family}") format("svg");
     font-weight: $font-weight;
     font-style: $font-style;
     font-stretch: $font-stretch;
   }
+}
+@mixin font-size($sizeValue: 1.6, $lineValue: $sizeValue * 1.25) {
+  font-size: ($sizeValue * 10) + px;
+  line-height: ($lineValue * 10) + px;
+  font-size: $sizeValue + rem;
+  line-height: $lineValue + rem;
 }
