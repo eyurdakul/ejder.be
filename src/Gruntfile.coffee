@@ -64,12 +64,10 @@ module.exports = (grunt)->
     wiredep:
       dist:
         src: [
-          "#{__dirname}/src/templates/inc/vendor.jade"
+          "#{__dirname}/src/templates/partials/inc/vendor.jade"
         ]
         options:
           directory: "./bower_components"
-          exclude: []
-          verbose: true
     connect:
       server:
         options:
