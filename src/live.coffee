@@ -1,7 +1,7 @@
 ###
 grunt = require "grunt"
 
-class Socket
+class WebSocket
   socket = undefined
   constants =
     STATUS_CONNECTION: "connection"
@@ -14,6 +14,6 @@ class Socket
   onConnection: (socket)->
     socket.emit "test", message: @data
 
-module.exports = new Socket()
+module.exports = WebSocket
 
 ###

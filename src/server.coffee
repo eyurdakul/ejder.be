@@ -13,8 +13,11 @@ class Router
       DEFAULT_PATH: "/"
       STATUS_OK: 200
       STATUS_NOTFOUND: 400
+      STATIC_DIR: "./public"
+      VENDOR_DIR: "."
       CONTENT_HTML:
         "Content-type":"text/html"
+
     options:
       templatePath: "src/templates/"
     jade:
@@ -25,7 +28,8 @@ class Router
     @request = request
     @request.setEncoding @data.constants.DEFAULT_ENCODING
     @response = response
-    @fileServer = new statics.Server "./public"
+    @fileServer = new statics.Server @data.constants.STATIC_DIR
+    @libServer = new statics.Server @data.constants.VENDOR_DIR
     return @init()
 
   init: ->
@@ -36,8 +40,10 @@ class Router
       @response.writeHead @data.constants.STATUS_OK, @data.constants.CONTENT_HTML
       @response.end @load("MAIN_TEMPLATE")
     else
-      if fs.existsSync __dirname+route
+      if fs.existsSync @data.constants.STATIC_DIR+route
         @fileServer.serve @request, @response
+      else if fs.existsSync @data.constants.VENDOR_DIR+route
+        @libServer.serve @request, @response
       else
         @response.writeHead @data.constants.STATUS_NOTFOUND, @data.constants.CONTENT_HTML
         @response.end @load("NOTFOUND_TEMPLATE")

@@ -90,11 +90,9 @@
       },
       wiredep: {
         dist: {
-          src: ["" + __dirname + "/src/templates/inc/vendor.jade"],
+          src: ["" + __dirname + "/src/templates/partials/inc/vendor.jade"],
           options: {
-            directory: "./bower_components",
-            exclude: [],
-            verbose: true
+            directory: "./bower_components"
           }
         }
       },
