@@ -25,6 +25,7 @@
   "dependencies":{
       "jquery": "latest",
       "bootstrap": "latest",
-      "modernizr": "latest"
+      "modernizr": "latest",
+      "socket.io-client": "latest"
   }
 }
