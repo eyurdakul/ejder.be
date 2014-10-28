@@ -20,7 +20,7 @@ module.exports = (grunt)->
       uglify:
         files: ["**/*.coffee", "**/*.scss"]
         tasks: ["uglify"]
-    clean: ["#{__dirname}/public/*"]
+    clean: ["#{__dirname}/public/*", "#{__dirname}/private/*"]
     copy:
       main:
         files: [
@@ -35,7 +35,8 @@ module.exports = (grunt)->
       compile:
         files:
           "Gruntfile.js": "src/Gruntfile.coffee"
-          "public/server.js": "src/server.coffee"
+          "private/server.js": "src/server.coffee"
+          "private/live.js": "src/live.coffee"
           "public/scripts/app.js":["src/scripts/*.coffee"]
     compass:
       dist:
@@ -46,12 +47,10 @@ module.exports = (grunt)->
       build:
         files:
           "public/styles/min/main.min.css":["#{__dirname}/public/styles/*.css"]
-          "public/styles/min/vendor.min.css":["bower_components/bootstrap/dist/css/bootstrap.css"]
     uglify:
       dist:
         files:
           "public/scripts/min/app.min.js":["#{__dirname}/public/scripts/*.js"]
-          "public/scripts/min/vendor.min.js":["bower_components/jquery/dist/jquery.js", "bower_components/bootstrap/dist/js/bootstrap.js", "bower_components/modernizr/modernizr.js"]
     spritely:
       dist:
         options:
@@ -62,16 +61,26 @@ module.exports = (grunt)->
           src: ["#{__dirname}/src/sprite/*.png"]
           dest: "#{__dirname}/public/sprite/sprite.png"
         ]
+    wiredep:
+      dist:
+        src: [
+          "#{__dirname}/src/templates/partials/inc/vendor.jade"
+        ]
+        options:
+          directory: "./bower_components"
     connect:
       server:
         options:
-          port: 8080
+          port: 8000
           hostname: "*"
-          base: "./public"
+          socketio: true
           onCreateServer: (server, connect, options)->
-            watchdog = require "./public/server.js"
-            watchdog.listen 8000
-            grunt.log.writeln "Listening port "+options.port
+            #io = require "socket.io"
+            #live = require "./private/live.js"
+
+            watchdog = require "./private/server.js"
+            watchdog.listen 8080
+
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-copy"
@@ -80,7 +89,9 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-contrib-cssmin"
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-spritely"
+  grunt.loadNpmTasks "grunt-wiredep"
+  grunt.loadNpmTasks "grunt-connect-socket.io"
   grunt.loadNpmTasks "grunt-contrib-connect"
   grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "connect", "watch"]
+  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "connect", "watch"]
   return

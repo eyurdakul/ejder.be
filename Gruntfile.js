@@ -28,7 +28,7 @@
           tasks: ["uglify"]
         }
       },
-      clean: ["" + __dirname + "/public/*"],
+      clean: ["" + __dirname + "/public/*", "" + __dirname + "/private/*"],
       copy: {
         main: {
           files: [
@@ -45,7 +45,8 @@
         compile: {
           files: {
             "Gruntfile.js": "src/Gruntfile.coffee",
-            "public/server.js": "src/server.coffee",
+            "private/server.js": "src/server.coffee",
+            "private/live.js": "src/live.coffee",
             "public/scripts/app.js": ["src/scripts/*.coffee"]
           }
         }
@@ -61,16 +62,14 @@
       cssmin: {
         build: {
           files: {
-            "public/styles/min/main.min.css": ["" + __dirname + "/public/styles/*.css"],
-            "public/styles/min/vendor.min.css": ["bower_components/bootstrap/dist/css/bootstrap.css"]
+            "public/styles/min/main.min.css": ["" + __dirname + "/public/styles/*.css"]
           }
         }
       },
       uglify: {
         dist: {
           files: {
-            "public/scripts/min/app.min.js": ["" + __dirname + "/public/scripts/*.js"],
-            "public/scripts/min/vendor.min.js": ["bower_components/jquery/dist/jquery.js", "bower_components/bootstrap/dist/js/bootstrap.js", "bower_components/modernizr/modernizr.js"]
+            "public/scripts/min/app.min.js": ["" + __dirname + "/public/scripts/*.js"]
           }
         }
       },
@@ -89,17 +88,24 @@
           ]
         }
       },
+      wiredep: {
+        dist: {
+          src: ["" + __dirname + "/src/templates/partials/inc/vendor.jade"],
+          options: {
+            directory: "./bower_components"
+          }
+        }
+      },
       connect: {
         server: {
           options: {
-            port: 8080,
+            port: 8000,
             hostname: "*",
-            base: "./public",
+            socketio: true,
             onCreateServer: function(server, connect, options) {
               var watchdog;
-              watchdog = require("./public/server.js");
-              watchdog.listen(8000);
-              return grunt.log.writeln("Listening port " + options.port);
+              watchdog = require("./private/server.js");
+              return watchdog.listen(8080);
             }
           }
         }
@@ -112,9 +118,11 @@
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-spritely");
+    grunt.loadNpmTasks("grunt-wiredep");
+    grunt.loadNpmTasks("grunt-connect-socket.io");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.registerTask("default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "connect", "watch"]);
+    grunt.registerTask("default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "connect", "watch"]);
   };
 
 }).call(this);
