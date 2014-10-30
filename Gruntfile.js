@@ -1,4 +1,8 @@
 (function() {
+  var path;
+
+  path = require("path");
+
   module.exports = function(grunt) {
     grunt.initConfig({
       pkg: grunt.file.readJSON("package.json"),
@@ -44,11 +48,17 @@
       coffee: {
         compile: {
           files: {
-            "Gruntfile.js": "src/Gruntfile.coffee",
-            "private/server.js": "src/server.coffee",
-            "private/live.js": "src/live.coffee",
-            "public/scripts/app.js": ["src/scripts/*.coffee"]
+            "public/scripts/app.js": ["src/scripts/*.coffee"],
+            "Gruntfile.js": "src/Gruntfile.coffee"
           }
+        },
+        app: {
+          expand: true,
+          flatten: false,
+          cwd: "" + __dirname + "/src/app",
+          src: ["**/*.coffee"],
+          dest: "" + __dirname + "/private/",
+          ext: ".js"
         }
       },
       compass: {
@@ -90,23 +100,19 @@
       },
       wiredep: {
         dist: {
-          src: ["" + __dirname + "/src/templates/partials/inc/vendor.jade"],
+          src: [path.resolve("/src/templates/partials/inc/vendor.jade")],
           options: {
             directory: "./bower_components"
           }
         }
       },
-      connect: {
+      express: {
         server: {
           options: {
-            port: 8000,
-            hostname: "*",
-            socketio: true,
-            onCreateServer: function(server, connect, options) {
-              var watchdog;
-              watchdog = require("./private/server.js");
-              return watchdog.listen(8080);
-            }
+            port: 8080,
+            bases: ["" + __dirname + "/public", "" + __dirname + "/bower_components"],
+            server: "" + __dirname + "/private/server.js",
+            debug: true
           }
         }
       }
@@ -119,10 +125,9 @@
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-spritely");
     grunt.loadNpmTasks("grunt-wiredep");
-    grunt.loadNpmTasks("grunt-connect-socket.io");
-    grunt.loadNpmTasks("grunt-contrib-connect");
+    grunt.loadNpmTasks("grunt-express");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.registerTask("default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "connect", "watch"]);
+    grunt.registerTask("default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "express", "express-start", "watch"]);
   };
 
 }).call(this);
