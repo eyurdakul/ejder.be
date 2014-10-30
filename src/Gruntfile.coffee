@@ -1,3 +1,4 @@
+path = require "path"
 module.exports = (grunt)->
   grunt.initConfig
     pkg: grunt.file.readJSON "package.json"
@@ -34,10 +35,15 @@ module.exports = (grunt)->
     coffee:
       compile:
         files:
-          "Gruntfile.js": "src/Gruntfile.coffee"
-          "private/server.js": "src/server.coffee"
-          "private/live.js": "src/live.coffee"
           "public/scripts/app.js":["src/scripts/*.coffee"]
+          "Gruntfile.js": "src/Gruntfile.coffee"
+      app:
+        expand: true
+        flatten: false
+        cwd: "#{__dirname}/src/app"
+        src: ["**/*.coffee"]
+        dest: "#{__dirname}/private/"
+        ext: ".js"
     compass:
       dist:
         options:
@@ -64,23 +70,17 @@ module.exports = (grunt)->
     wiredep:
       dist:
         src: [
-          "#{__dirname}/src/templates/partials/inc/vendor.jade"
+          path.resolve "/src/templates/partials/inc/vendor.jade"
         ]
         options:
           directory: "./bower_components"
-    connect:
+    express:
       server:
         options:
-          port: 8000
-          hostname: "*"
-          socketio: true
-          onCreateServer: (server, connect, options)->
-            #io = require "socket.io"
-            #live = require "./private/live.js"
-
-            watchdog = require "./private/server.js"
-            watchdog.listen 8080
-
+          port: 8080
+          bases: ["#{__dirname}/public", "#{__dirname}/bower_components"]
+          server: "#{__dirname}/private/server.js"
+          debug: true
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-copy"
@@ -90,8 +90,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-spritely"
   grunt.loadNpmTasks "grunt-wiredep"
-  grunt.loadNpmTasks "grunt-connect-socket.io"
-  grunt.loadNpmTasks "grunt-contrib-connect"
+  grunt.loadNpmTasks "grunt-express"
   grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "connect", "watch"]
+  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "express", "express-start", "watch"]
   return
