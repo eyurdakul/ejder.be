@@ -11,7 +11,7 @@ module.exports = (grunt)->
         tasks: ["copy"]
       coffee:
         files: ["**/*.coffee", "**/*.scss"]
-        tasks: ["coffee:compile"]
+        tasks: ["coffee"]
       compass:
         files: ["**/*.coffee", "**/*.scss"]
         tasks: ["compass"]
@@ -74,13 +74,6 @@ module.exports = (grunt)->
         ]
         options:
           directory: "./bower_components"
-    express:
-      server:
-        options:
-          port: 8080
-          bases: ["#{__dirname}/public", "#{__dirname}/bower_components"]
-          server: "#{__dirname}/private/server.js"
-          debug: true
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-copy"
@@ -90,7 +83,6 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-spritely"
   grunt.loadNpmTasks "grunt-wiredep"
-  grunt.loadNpmTasks "grunt-express"
   grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "express", "express-start", "watch"]
+  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "spritely", "cssmin", "uglify", "wiredep", "watch"]
   return

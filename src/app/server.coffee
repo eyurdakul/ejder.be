@@ -4,6 +4,7 @@ jade = require "jade"
 io = require "socket.io"
 
 class Bootstrap
+  _self = @
   data:
     constants:
       DEFAULT_ENCODING: "UTF8"
@@ -18,33 +19,26 @@ class Bootstrap
       pretty: true
       title: "Ejder Yurdakul 2014"
 
-  construtor: ->
+  constructor: ->
     @app = express()
     @server = http.createServer @app
-    @app.configure = @config
+    @app.configure = @config()
     @app.get @data.routes.DEFAULT_PATH, @loadMain
-
-  listen: (args...)->
-    console.log "listening"
-    @app.listen(args)
-
-  use:(args...)->
-    console.log "using"
-    @app.use args
+    @app.listen 8080
 
   config: ->
-    @app.use express.static "#{__dirname}/public"
-    @app.use express.static "#{__dirname}/bower_components"
+    @app.use "/public", express.static("#{__dirname}/../public")
+    @app.use "/bower_components", express.static("#{__dirname}/../bower_components")
 
   loadMain: (request, response)->
-    response.end @loadContent "MAIN_TEMPLATE"
+    data = jade:
+      pretty: true
+      title: "Ejder Yurdakul 2014"
+    content = jade.renderFile "../src/templates/index.jade", data
+    response.end content
 
   loadContent: (template)->
-    jade.renderFile @data.options.templatePath+@data.templates[template], @data.jade
+    jade.renderFile Bootstrap.options.templatePath+Bootstrap.data.templates[template], Bootstrap.data.jade
 
-  this
 
-#mainApp = new Bootstrap
-app = express()
-server = http.createServer app
-module.exports = server
+new Bootstrap()
