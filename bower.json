@@ -22,10 +22,11 @@
     "test",
     "tests"
   ],
-  "dependencies":{
-      "jquery": "latest",
-      "bootstrap": "latest",
-      "modernizr": "latest",
-      "socket.io-client": "latest"
+  "dependencies": {
+    "jquery": "latest",
+    "bootstrap": "latest",
+    "modernizr": "latest",
+    "socket.io-client": "latest",
+    "bower-skrollr": "~0.6.26"
   }
 }
