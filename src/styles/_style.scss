@@ -3,7 +3,9 @@ html{
     header{
 
     }
-    section{
+    section.viewport{
+      background: $color-muted-blue;
+      @include full-height();
       article{
         a{
           text-decoration: none;

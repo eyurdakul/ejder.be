@@ -7,32 +7,20 @@
     grunt.initConfig({
       pkg: grunt.file.readJSON("package.json"),
       watch: {
-        clean: {
-          files: ["**/*.coffee", "**/*.scss"],
-          tasks: ["clean"]
+        style: {
+          files: ["**/*.scss"],
+          tasks: ["clean:style", "clean:media", "copy", "compass", "cssmin"]
         },
-        copy: {
-          files: ["**/*.coffee", "**/*.scss"],
-          tasks: ["copy"]
-        },
-        coffee: {
-          files: ["**/*.coffee", "**/*.scss"],
-          tasks: ["coffee"]
-        },
-        compass: {
-          files: ["**/*.coffee", "**/*.scss"],
-          tasks: ["compass"]
-        },
-        cssmin: {
-          files: ["**/*.coffee", "**/*.scss"],
-          tasks: ["cssmin"]
-        },
-        uglify: {
-          files: ["**/*.coffee", "**/*.scss"],
-          tasks: ["uglify"]
+        script: {
+          files: ["**/*.coffee"],
+          tasks: ["clean:script", "coffee", "uglify"]
         }
       },
-      clean: ["" + __dirname + "/public/*", "" + __dirname + "/private/*"],
+      clean: {
+        style: ["" + __dirname + "/public/styles/*"],
+        script: ["" + __dirname + "/public/scripts/*", "" + __dirname + "/private/*"],
+        media: ["" + __dirname + "/public/media/*"]
+      },
       copy: {
         main: {
           files: [
@@ -49,7 +37,8 @@
         compile: {
           files: {
             "public/scripts/app.js": ["src/scripts/*.coffee"],
-            "Gruntfile.js": "src/Gruntfile.coffee"
+            "Gruntfile.js": "src/Gruntfile.coffee",
+            "config/settings.js": "config/settings.coffee"
           }
         },
         app: {
