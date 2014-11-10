@@ -13,8 +13,9 @@ module.exports = (grunt)->
       style: ["#{__dirname}/public/styles/*"]
       script: ["#{__dirname}/public/scripts/*", "#{__dirname}/private/*"]
       media: ["#{__dirname}/public/media/*"]
+      sprite: ["#{__dirname}/public/sprite/*"]
     copy:
-      main:
+      build:
         files: [
           (
             expand: true
@@ -26,9 +27,14 @@ module.exports = (grunt)->
     coffee:
       compile:
         files:
-          "public/scripts/app.js":["src/scripts/*.coffee"]
           "Gruntfile.js": "src/Gruntfile.coffee"
-          "config/settings.js": "config/settings.coffee"
+      front:
+        expand: true
+        flatten: false
+        cwd: "#{__dirname}/src/scripts"
+        src: ["**/*.coffee"]
+        dest: "#{__dirname}/public/scripts/"
+        ext: ".js"
       app:
         expand: true
         flatten: false
@@ -37,7 +43,7 @@ module.exports = (grunt)->
         dest: "#{__dirname}/private/"
         ext: ".js"
     compass:
-      dist:
+      build:
         options:
           sassDir: "#{__dirname}/src/styles/"
           cssDir: "#{__dirname}/public/styles/"
@@ -46,11 +52,15 @@ module.exports = (grunt)->
         files:
           "public/styles/min/main.min.css":["#{__dirname}/public/styles/*.css"]
     uglify:
-      dist:
-        files:
-          "public/scripts/min/app.min.js":["#{__dirname}/public/scripts/*.js"]
+      build:
+        files: [
+          expand: true
+          cwd: "#{__dirname}/public/scripts"
+          src: "**/*.js"
+          dest: "#{__dirname}/public/scripts/min"
+        ]
     spritely:
-      dist:
+      build:
         options:
           destCSS: "#{__dirname}/public/styles/sprite.css"
           algorithm: "binary-tree"
@@ -60,9 +70,9 @@ module.exports = (grunt)->
           dest: "#{__dirname}/public/sprite/sprite.png"
         ]
     wiredep:
-      dist:
+      build:
         src: [
-          path.resolve "/src/templates/partials/inc/vendor.jade"
+          path.resolve "#{__dirname}/src/templates/partials/inc/vendor.jade"
         ]
         options:
           directory: "./bower_components"

@@ -1,12 +1,10 @@
 include mixins
 doctype "html"
-html(lang="en")
+html(lang="en", ng-app="EjderYurdakul")
     include partials/head
-    body
+    body(ng-controller="testController")
         header
-        section.viewport.col-lg-12
-            article("id"="intro")
-                blockquote
-                    h1 Hi! This is Ejder Yurdakul...
-                    h2 Freelance senior coding guy
+        section.viewport.col-lg-12.ng-view
+            article
+                h1 {{test}}
         footer

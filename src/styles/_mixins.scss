@@ -44,3 +44,13 @@
   height: 100%;
   display: block;
 }
+@mixin web-table(){
+  display: table;
+  table-layout: fixed;
+  > {
+    display: table-row;
+    > {
+      display: table-cell;
+    }
+  }
+}
