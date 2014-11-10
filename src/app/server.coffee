@@ -2,7 +2,6 @@ express = require "express"
 http = require "http"
 jade = require "jade"
 io = require "socket.io"
-config = require "../config/settings"
 
 class Bootstrap
   _self = Bootstrap.prototype
@@ -13,7 +12,7 @@ class Bootstrap
     modelPath: "#{__dirname}/../private/models"
     contentPath: "#{__dirname}/../public"
     libraryPath: "#{__dirname}/../bower_components"
-  settings: config["DEV"]
+    port: 8080
 
   constructor: ->
     @app = express()
@@ -26,7 +25,7 @@ class Bootstrap
     @app.get @routes.DEFAULT_PATH, @load("index")
 
     #TODO implement socket io for crud operations
-    @io = io.listen @app.listen @settings.port
+    @io = io.listen @app.listen @options.port
     #TODO lazy loading
     @io.sockets.on "connection", (socket)->
       socket.emit "hello", planet : "world"

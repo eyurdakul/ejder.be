@@ -4,17 +4,8 @@ html{
 
     }
     section.viewport{
-      background: $color-muted-blue;
+      @include background(linear-gradient($color-muted-blue, $color-muted-blue-dark));
       @include full-height();
-      article{
-        a{
-          text-decoration: none;
-          @include transition(all, $animation-duration, $animation-easing);
-          &:hover{
-            font-weight: bold;
-          }
-        }
-      }
     }
     footer{
 
