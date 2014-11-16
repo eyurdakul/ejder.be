@@ -27,8 +27,6 @@
     "bootstrap": "latest",
     "modernizr": "latest",
     "socket.io-client": "latest",
-    "bower-skrollr": "~0.6.26",
-    "angularjs": "~1.3.2",
-    "require": "*"
+    "bower-skrollr": "~0.6.26"
   }
 }

@@ -1,3 +1,4 @@
-require.config baseUrl:"./"
-require ["module"], (module)->
-  angular.bootstrap document, ["EjderYurdakul"]
+app = angular.module "EjderYurdakul", []
+define ["controllers/indexController"], (indexController)->
+  app.controller "indexController", indexController
+return app

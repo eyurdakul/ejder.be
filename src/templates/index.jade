@@ -2,9 +2,9 @@ include mixins
 doctype "html"
 html(lang="en", ng-app="EjderYurdakul")
     include partials/head
-    body(ng-controller="testController")
+    body
         header
-        section.viewport.col-lg-12.ng-view
+        section.viewport.col-lg-12.ng-view(ng-controller="indexController")
             article
                 h1 {{test}}
         footer
