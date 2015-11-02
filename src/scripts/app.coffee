@@ -1,3 +1,2 @@
-require.config baseUrl:"./"
-require ["module"], (module)->
-  angular.bootstrap document, ["EjderYurdakul"]
+app = angular.module "EjderBe", ["ui.bootstrap"]
+app.controller "IntroController", IntroController

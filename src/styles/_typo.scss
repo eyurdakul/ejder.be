@@ -1,4 +1,4 @@
-@include fontify(ubuntu, ubuntu);
+@include fontify(titanone, titanone);
 @include fontify(fontin, fontin);
 @include fontify(fontinbold, fontinbold);
 html{
@@ -8,7 +8,7 @@ html{
   body{
     @include font-size(1.3);
     h1, h2, h3{
-      font-family: ubuntu;
+      font-family: titanone;
     }
     h1{
       @include font-size(3.6);
