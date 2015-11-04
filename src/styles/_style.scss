@@ -15,12 +15,10 @@ html{
           h1{
             @include font-size(12);
             @include rotate(2deg);
-            @include shadowy();
           }
           h3{
             @include font-size(5);
             @include rotate(-1deg);
-            @include shadowy();
           }
         }
       }

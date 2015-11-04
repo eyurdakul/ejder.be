@@ -6,12 +6,11 @@ html(lang="en")
         .safe-container
             header#top-summary.container-fluid(ng-controller="IntroController")
                 .logo.col-lg-6.col-xs-12
-                    | here comes a logo
+                    p here comes a logo
                 .intro.col-lg-6.col-xs-12
-                    .holder
-                        h3.fit-text #{hi}
-                        h1.fit-text #{name}
-                        h3.fit-text #{job_title}
+                    h3(data-fittext="1.0") {{viewdata.hi}}
+                    h1(data-fittext="1.0") {{viewdata.name}}
+                    h3(data-fittext="1.0") {{viewdata.job_title}}
             section#clients.container-fluid
                 h1 Some examples
                 .block.col-lg-4.col-sm-6.col-xs-12

@@ -1,3 +1,4 @@
+###
 class WebSocket
   constants :
     STATUS_CONNECTION: "connection"
@@ -10,4 +11,8 @@ class WebSocket
   onConnection: (socket)->
     socket.emit "test", message: "hello"
 
+  getIo: ->
+    @io
+
 module.exports = new WebSocket(io)
+###

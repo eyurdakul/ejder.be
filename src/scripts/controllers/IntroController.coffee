@@ -1,5 +1,9 @@
 IntroController = [
+  "$scope"
   "$log"
-  ($log)->
-    $log.debug "do nothing for now"
+  "BackendConnectionService"
+  ($scope, $log, BackendConnectionService)->
+    $log.debug "Creating IntroController"
+    BackendConnectionService.get("intro").then (data)->
+      $scope.viewdata = data.data
 ]
