@@ -8,7 +8,10 @@ module.exports = (grunt)->
         tasks: ["clean:style", "clean:media", "copy", "compass", "cssmin"]
       script:
         files: ["**/*.coffee"]
-        tasks: ["clean:script", "coffee", "uglify"]
+        tasks: ["clean:script", "coffee", "uglify", "copy"]
+      content:
+        files: ["#{__dirname}/src/app/data/**/*.json"]
+        tasks: ["copy:content"]
     clean:
       style: ["#{__dirname}/public/styles/*"]
       script: ["#{__dirname}/public/scripts/*", "#{__dirname}/private/*"]
@@ -21,6 +24,21 @@ module.exports = (grunt)->
             cwd: "#{__dirname}/src/media/"
             src: ["*", "**"]
             dest: "#{__dirname}/public/media/"
+          )
+          (
+            expand: true
+            cwd: "#{__dirname}/src/app/data/"
+            src: "*.json"
+            dest: "#{__dirname}/private/data/"
+          )
+        ]
+      content:
+        files: [
+          (
+            expand: true
+            cwd: "#{__dirname}/src/app/data/"
+            src: "*.json"
+            dest: "#{__dirname}/private/data/"
           )
         ]
     coffee:

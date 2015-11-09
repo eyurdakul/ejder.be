@@ -20,6 +20,12 @@
     }
   }
 }
+@mixin transition($duration: 0.5s, $ease: ease-in-out){
+  -webkit-transition: $duration $ease;
+  -moz-transition: $duration $ease;
+  -o-transition: $duration $ease;
+  transition: $duration $ease;
+}
 @mixin fontify($font-name, $font-family, $font-weight:normal, $font-style: normal, $font-stretch: normal){
   @font-face{
     font-family: "#{$font-family}";
@@ -60,9 +66,9 @@
   }
 }
 @mixin shadowy(){
-  -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.45);
-  -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.45);
-  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
 }
 @mixin balloon($direction, $width, $height, $arrow-size, $background-color){
   border-radius: 4%;

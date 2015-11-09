@@ -1,4 +1,4 @@
 ejder.be
 ========
 
-An example of using variously techniques together with Grunt and Bower
+An example of using variously libraries together with Grunt and Bower
