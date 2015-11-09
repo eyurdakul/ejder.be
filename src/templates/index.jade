@@ -4,36 +4,17 @@ html(lang="en")
     include partials/head
     body(ng-app="EjderBe")
         .safe-container
-            header#top-summary.container-fluid(ng-controller="IntroController")
+            nav#navigation(
+                ng-controller="NavigationController"
+                ng-if="showNavigation"
+                )
+            header#intro.container-fluid(ng-controller="IntroController")
                 .logo.col-lg-6.col-xs-12
-                    p here comes a logo
+                    p here comes a funny image
                 .intro.col-lg-6.col-xs-12
-                    h3(data-fittext="1.0") {{viewdata.hi}}
-                    h1(data-fittext="1.0") {{viewdata.name}}
-                    h3(data-fittext="1.0") {{viewdata.job_title}}
+                    h1 {{::viewdata.name}}
+                    h3 {{::viewdata.job_title}}
             section#clients.container-fluid
-                h1 Some examples
-                .block.col-lg-4.col-sm-6.col-xs-12
-                    h3 VRT Tv and Radio
-                    img(src="http://someimage.com")
-                    p Things i've done here and so on
-                .block.col-lg-4.col-sm-6.col-xs-12
-                    h3 VRT Tv and Radio
-                    img(src="http://someimage.com")
-                    p Things i've done here and so on
-                .block.col-lg-4.col-sm-6.col-xs-12
-                    h3 VRT Tv and Radio
-                    img(src="http://someimage.com")
-                    p Things i've done here and so on
-                .block.col-lg-4.col-sm-6.col-xs-12
-                    h3 VRT Tv and Radio
-                    img(src="http://someimage.com")
-                    p Things i've done here and so on
-                .block.col-lg-4.col-sm-6.col-xs-12
-                    h3 VRT Tv and Radio
-                    img(src="http://someimage.com")
-                    p Things i've done here and so on
-                .block.col-lg-4.col-sm-6.col-xs-12
-                    h3 VRT Tv and Radio
-                    img(src="http://someimage.com")
-                    p Things i've done here and so on
+            section#skills.container-fluid
+            section#contact.container-fluid
+            footer#footer.container-fluid
