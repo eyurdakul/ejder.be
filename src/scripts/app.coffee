@@ -16,16 +16,16 @@ app.service "ContentProviderService", ContentProviderService
 
 app.config ["$routeProvider", ($routeProvider)->
   $routeProvider
-  .when "/intro", ->
+  .when "/intro",
     templateUrl: "load/intro"
     controller: "IntroController"
-  .when "/clients", ->
+  .when "/clients",
     templateUrl: "load/clients"
     controller: "ClientsController"
-  .when "/skills", ->
+  .when "/skills",
     templateUrl: "load/skills"
     controller: "SkillsController"
-  .when "/contact", ->
+  .when "/contact",
     templateUrl: "load/contact"
     controller: "ContactController"
   .otherwise ->

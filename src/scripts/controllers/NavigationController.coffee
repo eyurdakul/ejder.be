@@ -11,7 +11,7 @@ NavigationController = [
     $scope.links = undefined
     $scope.activeLink = undefined
 
-    $scope.$on "$routeChangeSuccess", (next, current)->
+    $scope.$on "$routeChangeSuccess", (event, next, current)->
       $scope.activeLink = $location.path()
 
     $scope.init = ->
