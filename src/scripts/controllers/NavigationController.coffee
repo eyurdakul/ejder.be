@@ -1,7 +1,32 @@
 NavigationController = [
   "$scope"
+  "$location"
   "$log"
-  ($scope, $log)->
+  "ContentProviderService"
+  ($scope, $location, $log, ContentProviderService)->
+
     $log.debug "Creating NavigationController"
-    $scope.showNavigation = true
+
+    $scope.navigationLoaded = undefined
+    $scope.links = undefined
+    $scope.activeLink = undefined
+
+    $scope.$on "$routeChangeSuccess", (next, current)->
+      $scope.activeLink = $location.path()
+
+    $scope.init = ->
+      ContentProviderService.get("navigation")
+      .then (response)->
+        $scope.links =
+          [
+            {"target": "#intro", "path":"/intro", "text": "Intro"},
+            {"target": "#clients", "path":"/clients", "text": "Projects"},
+            {"target": "#skills", "path":"/skills", "text": "Skills"},
+            {"target": "#contact", "path":"/contact", "text": "Contact"}
+          ]
+      .finally ->
+        $scope.navigationLoaded = true
+      true
+
+    @
 ]

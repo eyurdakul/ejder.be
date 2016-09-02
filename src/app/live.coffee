@@ -10,6 +10,12 @@ class WebSocket
 
   onConnection: (socket)->
     socket.emit "test", message: "hello"
+    @app.get @routes.DATA_PATH, (request, response)->
+      model = request.param "model"
+      fs.readFile _self.options.dataPath+"/"+model+".json", (err, data)->
+        throw err if err
+        responseObject = JSON.parse data
+        response.json responseObject
 
   getIo: ->
     @io

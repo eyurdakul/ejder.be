@@ -1,17 +1,34 @@
-app = angular.module "EjderBe", ["ui.bootstrap", "ngLodash", "sn.skrollr"]
+app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap"]
 
-#init controllers
+#controllers
+app.controller "MainController", MainController
 app.controller "NavigationController", NavigationController
 app.controller "IntroController", IntroController
+app.controller "ClientsController", ClientsController
+app.controller "SkillsController", SkillsController
+app.controller "ContactController", ContactController
 
-#init services
-app.factory "BackendConnectionService", BackendConnectionService
+#services
+app.service "ContentProviderService", ContentProviderService
 
-#config
-app.config ["snSkrollrProvider", (snSkrollrProvider)->
-  snSkrollrProvider.config =
-    smoothScrolling : true
+#directives
+#TODO loading directive, send message directive
+
+app.config ["$routeProvider", ($routeProvider)->
+  $routeProvider
+  .when "/intro", ->
+    templateUrl: "load/intro"
+    controller: "IntroController"
+  .when "/clients", ->
+    templateUrl: "load/clients"
+    controller: "ClientsController"
+  .when "/skills", ->
+    templateUrl: "load/skills"
+    controller: "SkillsController"
+  .when "/contact", ->
+    templateUrl: "load/contact"
+    controller: "ContactController"
+  .otherwise ->
+    console.log "otherwise abi"
+    template: "<p>404</p>"
 ]
-
-angular.element(document).ready ->
-  console.debug "document is ready"

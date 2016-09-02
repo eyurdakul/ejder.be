@@ -1,0 +1,8 @@
+{
+  "links": [
+    {"target": "intro", "text": "Intro", "active": true},
+    {"target": "clients", "text": "Projects", "active": false},
+    {"target": "skills", "text": "Skills", "active": false},
+    {"target": "contact", "text": "Contact", "active": false}
+  ]
+}

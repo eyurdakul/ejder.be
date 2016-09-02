@@ -1,29 +1,43 @@
 html{
-  body{
+  body {
     background: $color-white;
     color: $color-black;
-    .safe-container{
+    .safe-container {
       max-width: 100%;
       overflow-x: hidden;
       overflow-y: auto;
-      >header, >section, >footer{
+      > header, > section {
         @include full-height();
-      }
-      header#top-summary{
-        @include background(linear-gradient($color-muted-blue, $color-muted-blue-dark));
+        > .column {
+          @include full-height();
         }
       }
-    }
-    section#intro{
+      header.intro {
+        @include background(linear-gradient($color-muted-blue, $color-muted-blue-dark));
+        .intro-holder {
+          &__name {
+            @include bgimage("field");
+            &--bold{
+              font-weight: bold;
+              text-transform: uppercase;
+              padding-left: 10px;
+            }
+            &--normal{
+              font-weight: normal;
+              text-transform: lowercase;
+            }
+          }
+        }
+      }
+      section.skills {
 
-    }
-    section#skills{
+      }
+      section.experience {
 
-    }
-    section#experience{
+      }
+      footer.contact {
 
+      }
     }
-    footer#contact{
-
-    }
+  }
 }

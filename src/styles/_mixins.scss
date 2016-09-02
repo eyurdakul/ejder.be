@@ -1,3 +1,6 @@
+@mixin bgimage($url, $ext: png) {
+  background: url("#{$img-path}#{$url}.#{$ext}") no-repeat scroll 0px 100% / cover transparent;
+}
 @mixin breakpoint($point){
   @if $point == desktop{
     @media screen and (min-width: $screen-lg){

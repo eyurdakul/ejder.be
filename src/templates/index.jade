@@ -4,17 +4,11 @@ html(lang="en")
     include partials/head
     body(ng-app="EjderBe")
         .safe-container
-            nav#navigation(
-                ng-controller="NavigationController"
-                ng-if="showNavigation"
-                )
-            header#intro.container-fluid(ng-controller="IntroController")
-                .logo.col-lg-6.col-xs-12
-                    p here comes a funny image
-                .intro.col-lg-6.col-xs-12
-                    h1 {{::viewdata.name}}
-                    h3 {{::viewdata.job_title}}
-            section#clients.container-fluid
-            section#skills.container-fluid
-            section#contact.container-fluid
-            footer#footer.container-fluid
+            nav.collapse.navbar-collapse
+                ul.nav.nav-pills(
+                    ng-controller="NavigationController"
+                    ng-init="init()"
+                    )
+                    li(role="presentation", ng-repeat="link in links", ng-class="{'active':(link.path == activeLink)}")
+                        a(href="{{link.target}}") {{link.text}}
+            section(ng-view)

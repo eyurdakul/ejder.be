@@ -2,15 +2,17 @@ express = require "express"
 http = require "http"
 jade = require "jade"
 fs = require "fs"
+path = require "path"
 
 class Bootstrap
   _self = Bootstrap.prototype
   routes:
     DEFAULT_PATH: "/"
-    DATA_PATH: "/get/:model"
+    TEMPLATE_PATH: "/load/:model"
   options:
     templatePath: "#{__dirname}/../src/templates"
     dataPath: "#{__dirname}/../private/data"
+    isDev: "#{__dirname}/../src/app/dev"
     contentPath: "#{__dirname}/../public"
     libraryPath: "#{__dirname}/../bower_components"
     port: 8080
@@ -25,13 +27,14 @@ class Bootstrap
     @app.engine "jade", jade.__express
 
     @app.get @routes.DEFAULT_PATH, (request, response)->
-      response.render "index"
-    @app.get @routes.DATA_PATH, (request, response)->
+      appData =
+        data:
+          isDev: path.existsSync _self.options.isDev
+
+      response.render "index", appData
+    @app.get @routes.TEMPLATE_PATH, (request, response)->
       model = request.param "model"
-      fs.readFile _self.options.dataPath+"/"+model+".json", (err, data)->
-        throw err if err
-        responseObject = JSON.parse data
-        response.json responseObject
+      response.render model
     @app.listen @options.port
 
   @
