@@ -29,6 +29,5 @@ app.config ["$routeProvider", ($routeProvider)->
     templateUrl: "load/contact"
     controller: "ContactController"
   .otherwise ->
-    console.log "otherwise abi"
-    template: "<p>404</p>"
+    redirectTo
 ]

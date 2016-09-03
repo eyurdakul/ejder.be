@@ -4,15 +4,11 @@ html(lang="en")
     include partials/head
     body(ng-app="EjderBe")
         .safe-container
-            nav.collapse.navbar-collapse
-                ul.nav.nav-pills(
-                    ng-controller="NavigationController"
-                    ng-init="init()"
-                    ng-scope
-                    )
+            nav.collapse.navbar-collapse(
+                ng-controller="NavigationController"
+                ng-init="init()"
+            )
+                ul.nav.nav-pills
                     li(role="presentation", ng-repeat="link in links", ng-class="{'active':(link.path == activeLink)}")
                         a(href="{{link.target}}") {{link.text}}
-            section(
-                ng-scope
-                ng-view
-                )
+            section(ng-view)

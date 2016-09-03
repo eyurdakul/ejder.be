@@ -17,13 +17,7 @@ NavigationController = [
     $scope.init = ->
       ContentProviderService.get("navigation")
       .then (response)->
-        $scope.links =
-          [
-            {"target": "#intro", "path":"/intro", "text": "Intro"},
-            {"target": "#clients", "path":"/clients", "text": "Projects"},
-            {"target": "#skills", "path":"/skills", "text": "Skills"},
-            {"target": "#contact", "path":"/contact", "text": "Contact"}
-          ]
+        $scope.links = response.links
       .finally ->
         $scope.navigationLoaded = true
       true

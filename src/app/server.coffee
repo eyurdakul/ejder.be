@@ -1,7 +1,6 @@
 express = require "express"
 http = require "http"
 jade = require "jade"
-fs = require "fs"
 path = require "path"
 
 class Bootstrap
@@ -11,14 +10,21 @@ class Bootstrap
     TEMPLATE_PATH: "/load/:model"
   options:
     templatePath: "#{__dirname}/../src/templates"
-    dataPath: "#{__dirname}/../private/data"
     isDev: "#{__dirname}/../src/app/dev"
     contentPath: "#{__dirname}/../public"
     libraryPath: "#{__dirname}/../bower_components"
     port: 8080
+    socketPort: 400
 
   constructor: ->
     @app = express()
+
+    @server = http.Server @app
+    @server.listen @options.socketPort
+    @io = require("socket.io")(@server)
+    @socketConnector = require("./live.js")
+
+    @socketConnector.init @io
 
     @app.use "/public", express.static(@options.contentPath)
     @app.use "/bower_components", express.static(@options.libraryPath)
