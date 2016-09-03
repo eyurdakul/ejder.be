@@ -25,6 +25,7 @@
     "angular-route": "~1.5.x",
     "socket.io-client": "latest",
     "angular-bootstrap": "latest",
-    "bootstrap-css-only": "latest"
+    "bootstrap-css-only": "latest",
+    "angulartics-google-analytics": "^0.2.1"
   }
 }

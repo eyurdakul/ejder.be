@@ -4,7 +4,8 @@
   "description": "my personal site",
   "main": "index.html",
   "dependencies": {
-    "grunt-init": "^0.3.2"
+    "grunt-init": "^0.3.2",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "cssmin": "^0.4.1",

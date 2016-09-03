@@ -1,4 +1,4 @@
-app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap"]
+app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "angulartics"]
 
 #controllers
 app.controller "MainController", MainController
@@ -28,6 +28,4 @@ app.config ["$routeProvider", ($routeProvider)->
   .when "/contact",
     templateUrl: "load/contact"
     controller: "ContactController"
-  .otherwise ->
-    redirectTo
 ]

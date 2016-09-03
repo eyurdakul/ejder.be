@@ -11,16 +11,18 @@ NavigationController = [
     $scope.links = undefined
     $scope.activeLink = undefined
 
-    $scope.$on "$routeChangeSuccess", (event, next, current)->
+    $scope.$on "$routeChangeSuccess", ->
       $scope.activeLink = $location.path()
 
     $scope.init = ->
       ContentProviderService.get("navigation")
-      .then (response)->
-        $scope.links = response.links
+      .then handleData, null, handleData
       .finally ->
         $scope.navigationLoaded = true
       true
+
+    handleData = (response)->
+      $scope.links = response.links
 
     @
 ]
