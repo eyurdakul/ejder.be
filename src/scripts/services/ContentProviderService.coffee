@@ -1,5 +1,5 @@
 ContentProviderService = [
-  "$log", "$location", "$q", ($log, $location, $q)->
+  "$log", "$location", "$q", "SocketService", ($log, $location, $q, SocketService)->
 
     $log.debug "Creating ContentProviderService"
 
@@ -7,9 +7,7 @@ ContentProviderService = [
     content = {}
 
     CONSTANTS =
-      connectionPort: ":400"
-      protocolSuffix: "://"
-      eventConnected: "connectionEstablished"
+      eventQuery: "query"
       eventResult: "result"
       eventError: "queryError"
       eventUpdate: "update"
@@ -20,7 +18,7 @@ ContentProviderService = [
       promises[data.model].notify  content[data.model]
 
     onUpdate = (data)->
-      socket.emit "query",
+      SocketService.emit CONSTANTS.eventQuery,
         model: data.model
 
     get = (model)->
@@ -28,18 +26,14 @@ ContentProviderService = [
       deferred = $q.defer()
       if not content[model]
         promises[model] = deferred
-        socket.emit "query",
+        SocketService.emit CONSTANTS.eventQuery,
           model: model
       else
         deferred.notify content[model]
       deferred.promise
 
-    socket = io.connect($location.$$protocol+CONSTANTS.protocolSuffix+$location.$$host+CONSTANTS.connectionPort)
-    socket.on CONSTANTS.eventConnected, (data)->
-      $log.debug "Connection is established with the socket.io server on: "+data.datetime
-
-    socket.on CONSTANTS.eventResult, onData
-    socket.on CONSTANTS.eventUpdate, onUpdate
+    SocketService.registerCallback CONSTANTS.eventResult, onData
+    SocketService.registerCallback CONSTANTS.eventUpdate, onUpdate
 
     get: get
 ]

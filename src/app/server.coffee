@@ -48,7 +48,7 @@ class Bootstrap
       model = request.param "model"
       response.render model
     @app.use (request, response, next)->
-      _self.logger.warning "Status: " + _self.options.status.notFound + " Request: " + request
+      _self.logger.warning "404 Not Found!: " + request.originalUrl
       response.status(_self.options.status.notFound)
       appData =
         data:

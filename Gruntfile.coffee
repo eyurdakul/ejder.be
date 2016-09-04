@@ -50,6 +50,7 @@ module.exports = (grunt)->
             "#{__dirname}/src/scripts/services/*.coffee"
             "#{__dirname}/src/scripts/directives/*.coffee"
             "#{__dirname}/src/scripts/controllers/*.coffee"
+            "#{__dirname}/src/scripts/factories/*.coffee"
             "#{__dirname}/src/scripts/app.coffee"]
       back:
         expand: true

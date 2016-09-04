@@ -19,6 +19,7 @@ class WebSocket
     EVENT_RESULT: "result"
     EVENT_UPDATE: "update"
     EVENT_CHANGE: "change"
+    EVENT_EXCEPTION: "clientSideException"
 
   constructor: ->
     _self = @
@@ -28,7 +29,7 @@ class WebSocket
     @io.on @constants.STATUS_CONNECTION, @onConnection
     fs.readdir @options.dataPath, (error, files)->
       if error
-        logger.error error
+        logger.error error.toString()
       files.forEach (file)->
         fullPath = _self.options.dataPath + "/" + file
         if fs.statSync(fullPath).isFile() and file.match _self.options.fileRegexp
@@ -44,15 +45,16 @@ class WebSocket
       datetime: new Date()
 
     _self.socket.on _self.constants.EVENT_QUERY, _self.onQuery
+    _self.socket.on _self.constants.EVENT_EXCEPTION, _self.onException
 
   onQuery: (data)->
     if not data.model
-      logger.error "Model is missing in request, Data:" + JSON.parse data
+      logger.error data
       return false
     fs.readFile _self.options.dataPath+"/"+data.model+".json", (err, content)->
       status = undefined
       if err
-        logger.error "Something went wrong" + JSON.parse err
+        logger.error err
         status = _self.constants.STATUS_ERROR
         responseObject = {}
       else
@@ -63,6 +65,9 @@ class WebSocket
         model: data.model
         response: responseObject
         status: status
+
+  onException: (data)->
+    logger.error JSON.stringify data
 
   @
 

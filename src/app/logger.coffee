@@ -4,11 +4,13 @@ class Logger
   _self = undefined
 
   isDev: undefined
-  logFile: "error.log"
+  logFile: "../error.log"
   CONSTANTS:
     LOG_DEBUG: "debug"
     LOG_WARNING: "warn"
     LOG_ERROR: "error"
+    TYPE_STRING: "string"
+    TYPE_OBJECT: "object"
 
   constructor: ->
     _self = @
@@ -22,15 +24,14 @@ class Logger
       winston.level = @CONSTANTS.LOG_WARNING
       winston.remove winston.transports.Console
 
+  warning: (data)->
+    winston.log @CONSTANTS.LOG_WARNING, data
 
-  warning: (msg)->
-    winston.log @CONSTANTS.LOG_WARNING, msg
+  error: (data)->
+    winston.log @CONSTANTS.LOG_ERROR, data
 
-  error: (msg)->
-    winston.log @CONSTANTS.LOG_ERROR, msg
-
-  debug: (msg)->
-    winston.log @CONSTANTS.LOG_DEBUG, msg
+  debug: (data)->
+    winston.log @CONSTANTS.LOG_DEBUG, data
 
   @
 

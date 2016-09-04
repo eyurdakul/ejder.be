@@ -8,5 +8,7 @@ IntroController = [
 
     $scope.loaded = undefined
 
+    onot()
+
     @
 ]

@@ -1,4 +1,4 @@
-app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "angulartics"]
+app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "ngAnimate"]
 
 #controllers
 app.controller "MainController", MainController
@@ -10,9 +10,17 @@ app.controller "ContactController", ContactController
 
 #services
 app.service "ContentProviderService", ContentProviderService
+app.service "SocketService", SocketService
+
+#factories
+app.factory "ErrorLogFactory", ErrorLogFactory
 
 #directives
 #TODO loading directive, send message directive
+
+app.provider "$exceptionHandler",
+  $get: (ErrorLogFactory)->
+    ErrorLogFactory
 
 app.config ["$routeProvider", ($routeProvider)->
   $routeProvider
@@ -28,4 +36,6 @@ app.config ["$routeProvider", ($routeProvider)->
   .when "/contact",
     templateUrl: "load/contact"
     controller: "ContactController"
+  .otherwise
+    redirectTo: "/intro"
 ]
