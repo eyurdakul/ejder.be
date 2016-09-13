@@ -1,7 +1,6 @@
 app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "ngAnimate"]
 
 #controllers
-app.controller "MainController", MainController
 app.controller "NavigationController", NavigationController
 app.controller "IntroController", IntroController
 app.controller "ClientsController", ClientsController

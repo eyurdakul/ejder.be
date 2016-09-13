@@ -11,4 +11,4 @@ html(lang="en")
                 ul.nav.nav-pills
                     li(role="presentation", ng-repeat="link in links", ng-class="{'active':(link.path == activeLink)}")
                         a(href="{{link.target}}") {{link.text}}
-            section(ng-view)
+            section.stage(ng-view)

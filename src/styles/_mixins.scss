@@ -1,28 +1,6 @@
 @mixin bgimage($url, $ext: png) {
   background: url("#{$img-path}#{$url}.#{$ext}") no-repeat scroll 0px 100% / cover transparent;
 }
-@mixin breakpoint($point){
-  @if $point == desktop{
-    @media screen and (min-width: $screen-lg){
-      @content;
-    }
-  }
-  @else if $point == tablet{
-    @media screen and (min-width: $screen-md){
-      @content;
-    }
-  }
-  @else if $point == phablet{
-    @media screen and (min-width: $screen-sm){
-      @content;
-    }
-  }
-  @else if $point == phone{
-    @media screen and (max-width: $screen-sm){
-      @content;
-    }
-  }
-}
 @mixin transition($duration: 0.5s, $ease: ease-in-out){
   -webkit-transition: $duration $ease;
   -moz-transition: $duration $ease;
@@ -57,16 +35,6 @@
   min-height: 100%;
   height: 100%;
   display: block;
-}
-@mixin web-table(){
-  display: table;
-  table-layout: fixed;
-  > {
-    display: table-row;
-    > {
-      display: table-cell;
-    }
-  }
 }
 @mixin shadowy(){
   -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
