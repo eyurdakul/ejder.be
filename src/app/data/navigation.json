@@ -1,0 +1,8 @@
+{
+  "links": [
+    {"target": "#intro", "path":"/intro", "text": "Intro", "active": true},
+    {"target": "#clients", "path":"/clients", "text": "Projects", "active": false},
+    {"target": "#skills", "path":"/skills", "text": "Skills", "active": false},
+    {"target": "#contact", "path":"/contact", "text": "Contact", "active": false}
+  ]
+}

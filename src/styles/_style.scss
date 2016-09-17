@@ -1,29 +1,45 @@
 html{
-  body{
-    background: $color-white;
-    color: $color-black;
+  @include global-reset();
+  body {
     .safe-container{
-      max-width: 100%;
-      overflow-x: hidden;
-      overflow-y: auto;
-      >header, >section, >footer{
-        @include full-height();
-      }
-      header#top-summary{
-        @include background(linear-gradient($color-muted-blue, $color-muted-blue-dark));
+      position: relative;
+      @include full-height();
+      .stage{
+        @include transition();
+        position: absolute;
+        top: 40px;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        &.ng-enter{
+          left: -100%;
+          &.ng-enter-active{
+            left: 0;
+          }
+        }
+        &.ng-leave{
+          left: 0;
+          &.ng-leave-active{
+            left: 100%;
+          }
+        }
+        > .container-fluid{
+          flex: 1;
+        }
+        .intro{
+          background: red;
+        }
+        .clients{
+          background: blue;
+        }
+        .skills{
+          background: mediumpurple;
+        }
+        .contact{
+          background: yellowgreen;
         }
       }
     }
-    section#intro{
-
-    }
-    section#skills{
-
-    }
-    section#experience{
-
-    }
-    footer#contact{
-
-    }
+  }
 }

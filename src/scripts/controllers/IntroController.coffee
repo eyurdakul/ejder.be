@@ -1,9 +1,13 @@
+"use strict"
 IntroController = [
   "$scope"
   "$log"
-  "BackendConnectionService"
-  ($scope, $log, BackendConnectionService)->
+  "ContentProviderService"
+  ($scope, $log, ContentProviderService)->
+
     $log.debug "Creating IntroController"
-    BackendConnectionService.get("intro").then (data)->
-      $scope.viewdata = data.data
+
+    $scope.loaded = undefined
+
+    @
 ]

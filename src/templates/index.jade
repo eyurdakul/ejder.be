@@ -2,19 +2,13 @@ include mixins
 doctype "html"
 html(lang="en")
     include partials/head
-    body(ng-app="EjderBe")
+    body(ng-app="EjderBe", ng-strict-di)
         .safe-container
-            nav#navigation(
+            nav.collapse.navbar-collapse(
                 ng-controller="NavigationController"
-                ng-if="showNavigation"
-                )
-            header#intro.container-fluid(ng-controller="IntroController")
-                .logo.col-lg-6.col-xs-12
-                    p here comes a funny image
-                .intro.col-lg-6.col-xs-12
-                    h1 {{::viewdata.name}}
-                    h3 {{::viewdata.job_title}}
-            section#clients.container-fluid
-            section#skills.container-fluid
-            section#contact.container-fluid
-            footer#footer.container-fluid
+                ng-init="init()"
+            )
+                ul.nav.nav-pills
+                    li(role="presentation", ng-repeat="link in links", ng-class="{'active':(link.path == activeLink)}")
+                        a(href="{{link.target}}") {{link.text}}
+            section.stage(ng-view)

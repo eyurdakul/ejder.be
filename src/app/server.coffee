@@ -1,37 +1,60 @@
 express = require "express"
 http = require "http"
 jade = require "jade"
-fs = require "fs"
+path = require "path"
 
 class Bootstrap
-  _self = Bootstrap.prototype
+  _self = undefined
   routes:
     DEFAULT_PATH: "/"
-    DATA_PATH: "/get/:model"
+    TEMPLATE_PATH: "/load/:model"
   options:
     templatePath: "#{__dirname}/../src/templates"
-    dataPath: "#{__dirname}/../private/data"
-    contentPath: "#{__dirname}/../public"
+    isDev: "#{__dirname}/../dev"
+    contentPath: "#{__dirname}/../frontend"
     libraryPath: "#{__dirname}/../bower_components"
     port: 8080
+    socketPort: 400
+    status:
+      notFound: 404
+  isDev: undefined
 
   constructor: ->
+    _self = @
+    @isDev = path.existsSync @options.isDev
     @app = express()
 
-    @app.use "/public", express.static(@options.contentPath)
+    @server = http.Server @app
+    @server.listen @options.socketPort
+    @io = require("socket.io")(@server)
+    @socketConnector = require("./live.js")
+    @logger = require("./logger.js")
+    @logger.init @isDev
+
+    @socketConnector.init @io
+
+    @app.use "/frontend", express.static(@options.contentPath)
     @app.use "/bower_components", express.static(@options.libraryPath)
     @app.set "views", @options.templatePath
     @app.set "view engine", "jade"
     @app.engine "jade", jade.__express
 
     @app.get @routes.DEFAULT_PATH, (request, response)->
-      response.render "index"
-    @app.get @routes.DATA_PATH, (request, response)->
+      appData =
+        data:
+          isDev: _self.isDev
+      response.render "index", appData
+    @app.get @routes.TEMPLATE_PATH, (request, response)->
       model = request.param "model"
-      fs.readFile _self.options.dataPath+"/"+model+".json", (err, data)->
-        throw err if err
-        responseObject = JSON.parse data
-        response.json responseObject
+      response.render model
+    @app.use (request, response, next)->
+      _self.logger.warning "404 Not Found!: " + request.originalUrl
+      response.status(_self.options.status.notFound)
+      appData =
+        data:
+          isDev : _self.isDev
+          request: request
+      response.render "404", appData
     @app.listen @options.port
 
   @

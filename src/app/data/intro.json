@@ -1,4 +1,8 @@
 {
-  "name": "Ejder Yurdakul",
-  "job_title": "full stack developer"
+  "name": {
+    "first": "Ejder",
+    "last": "Yurdakul"
+  },
+  "title": "full stack developer",
+  "summary": "at the same time a chilly grower,<br/> a reptile bearer,<br/> a beer drinker<br/> and a professional husband."
 }
