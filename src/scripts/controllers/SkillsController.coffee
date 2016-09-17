@@ -1,3 +1,4 @@
+"use strict"
 SkillsController = [
   "$scope"
   "$log"

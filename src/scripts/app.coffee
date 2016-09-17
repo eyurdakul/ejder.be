@@ -1,3 +1,4 @@
+"use strict"
 app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "ngAnimate"]
 
 #controllers
@@ -18,8 +19,9 @@ app.factory "ErrorLogFactory", ErrorLogFactory
 #TODO loading directive, send message directive
 
 app.provider "$exceptionHandler",
-  $get: (ErrorLogFactory)->
+  $get: ["ErrorLogFactory", (ErrorLogFactory)->
     ErrorLogFactory
+  ]
 
 app.config ["$routeProvider", ($routeProvider)->
   $routeProvider

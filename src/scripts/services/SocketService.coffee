@@ -1,3 +1,4 @@
+"use strict"
 SocketService = ["$log", ($log)->
 
   CONSTANTS =

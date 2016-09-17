@@ -1,3 +1,4 @@
+"use strict"
 IntroController = [
   "$scope"
   "$log"

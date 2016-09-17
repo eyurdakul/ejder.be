@@ -2,7 +2,7 @@ include mixins
 doctype "html"
 html(lang="en")
     include partials/head
-    body(ng-app="EjderBe")
+    body(ng-app="EjderBe", ng-strict-di)
         .safe-container
             nav.collapse.navbar-collapse(
                 ng-controller="NavigationController"

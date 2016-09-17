@@ -3,8 +3,8 @@ head
     title #{title}
     include inc/vendor
     if data.isDev
-        script(type="text/javascript", src="/public/scripts/all.js")
-        link(rel="stylesheet", href="/public/styles/main.css")
+        script(type="text/javascript", src="/frontend/scripts/min/all.js")
+        link(rel="stylesheet", href="/frontend/styles/min/main.min.css")
     else
-        script(type="text/javascript", src="/public/scripts/min/all.js")
-        link(rel="stylesheet", href="/public/styles/min/main.min.css")
+        script(type="text/javascript", src="/frontend/scripts/min/all.js")
+        link(rel="stylesheet", href="/frontend/styles/min/main.min.css")

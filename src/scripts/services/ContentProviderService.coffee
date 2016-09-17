@@ -1,3 +1,4 @@
+"use strict"
 ContentProviderService = [
   "$log", "$location", "$q", "SocketService", ($log, $location, $q, SocketService)->
 

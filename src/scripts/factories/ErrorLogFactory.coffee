@@ -1,4 +1,5 @@
-ErrorLogFactory = ($log, $window, SocketService)->
+"use strict"
+ErrorLogFactory = ["$log", "$window", "SocketService", ($log, $window, SocketService)->
   (exception, cause)->
     $log.error.apply $log, arguments
 
@@ -12,3 +13,4 @@ ErrorLogFactory = ($log, $window, SocketService)->
         errorMessage: errorMessage
         stackTrace: stackTrace
         cause: (cause or "")
+]

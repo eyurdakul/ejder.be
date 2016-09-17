@@ -7,7 +7,7 @@ class WebSocket
 
   socket: undefined
   options :
-    dataPath: "#{__dirname}/../private/data"
+    dataPath: "#{__dirname}/../backend/data"
     fileRegexp : /[a-zA-Z]+.json/
 
   constants :

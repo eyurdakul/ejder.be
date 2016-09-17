@@ -10,8 +10,8 @@ class Bootstrap
     TEMPLATE_PATH: "/load/:model"
   options:
     templatePath: "#{__dirname}/../src/templates"
-    isDev: "#{__dirname}/../src/app/dev"
-    contentPath: "#{__dirname}/../public"
+    isDev: "#{__dirname}/../dev"
+    contentPath: "#{__dirname}/../frontend"
     libraryPath: "#{__dirname}/../bower_components"
     port: 8080
     socketPort: 400
@@ -33,7 +33,7 @@ class Bootstrap
 
     @socketConnector.init @io
 
-    @app.use "/public", express.static(@options.contentPath)
+    @app.use "/frontend", express.static(@options.contentPath)
     @app.use "/bower_components", express.static(@options.libraryPath)
     @app.set "views", @options.templatePath
     @app.set "view engine", "jade"

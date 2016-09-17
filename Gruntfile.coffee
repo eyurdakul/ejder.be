@@ -13,9 +13,10 @@ module.exports = (grunt)->
         files: ["#{__dirname}/src/app/data/**/*.json"]
         tasks: ["copy:content"]
     clean:
-      style: ["#{__dirname}/public/styles/*"]
-      script: ["#{__dirname}/public/scripts/*", "#{__dirname}/private/*"]
-      media: ["#{__dirname}/public/media/*"]
+      style: ["#{__dirname}/frontend/styles/*"]
+      script: ["#{__dirname}/frontend/scripts/*", "#{__dirname}/backend/*"]
+      media: ["#{__dirname}/frontend/media/*"]
+      sources: ["#{__dirname}/frontend/styles/*.css", "#{__dirname}/frontend/scripts/all.js"]
     copy:
       build:
         files: [
@@ -23,13 +24,13 @@ module.exports = (grunt)->
             expand: true
             cwd: "#{__dirname}/src/media/"
             src: ["*", "**"]
-            dest: "#{__dirname}/public/media/"
+            dest: "#{__dirname}/frontend/media/"
           )
           (
             expand: true
             cwd: "#{__dirname}/src/app/data/"
             src: "*.json"
-            dest: "#{__dirname}/private/data/"
+            dest: "#{__dirname}/backend/data/"
           )
         ]
       content:
@@ -38,7 +39,7 @@ module.exports = (grunt)->
             expand: true
             cwd: "#{__dirname}/src/app/data/"
             src: "*.json"
-            dest: "#{__dirname}/private/data/"
+            dest: "#{__dirname}/backend/data/"
           )
         ]
     coffee:
@@ -46,7 +47,7 @@ module.exports = (grunt)->
         options:
           join: true
         files:
-          "public/scripts/all.js":[
+          "frontend/scripts/all.js":[
             "#{__dirname}/src/scripts/services/*.coffee"
             "#{__dirname}/src/scripts/directives/*.coffee"
             "#{__dirname}/src/scripts/controllers/*.coffee"
@@ -57,24 +58,32 @@ module.exports = (grunt)->
         flatten: false
         cwd: "#{__dirname}/src/app"
         src: ["**/*.coffee"]
-        dest: "#{__dirname}/private/"
+        dest: "#{__dirname}/backend/"
         ext: ".js"
+    coffeelint:
+      app: [
+        "#{__dirname}/src/app/*.coffee"
+        "#{__dirname}/src/scripts/**/*.coffee"
+      ]
+      options:
+        "max_line_length":
+          "level":"ignore"
     compass:
       build:
         options:
           sassDir: "#{__dirname}/src/styles/"
-          cssDir: "#{__dirname}/public/styles/"
+          cssDir: "#{__dirname}/frontend/styles/"
     cssmin:
       build:
         files:
-          "public/styles/min/main.min.css":["#{__dirname}/public/styles/*.css"]
+          "frontend/styles/min/main.min.css":["#{__dirname}/frontend/styles/*.css"]
     uglify:
       build:
         files: [
           expand: true
-          cwd: "#{__dirname}/public/scripts"
+          cwd: "#{__dirname}/frontend/scripts"
           src: "**/*.js"
-          dest: "#{__dirname}/public/scripts/min"
+          dest: "#{__dirname}/frontend/scripts/min"
         ]
     wiredep:
       build:
@@ -83,6 +92,10 @@ module.exports = (grunt)->
         ]
         options:
           directory: "./bower_components"
+    forever:
+      server:
+        options:
+          index: "#{__dirname}/backend/server.js"
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-copy"
@@ -92,5 +105,10 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-wiredep"
   grunt.loadNpmTasks "grunt-contrib-watch"
-  grunt.registerTask "default", ["clean", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "watch"]
+  grunt.loadNpmTasks "grunt-coffeelint"
+  grunt.loadNpmTasks "grunt-forever"
+
+  grunt.registerTask "dev", ["coffeelint", "clean", "copy", "coffee", "compass", "wiredep", "watch", "forever:server:restart"]
+  grunt.registerTask "dist", ["clean", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "clean:sources", "forever:server:restart"]
+  grunt.registerTask "stop", ["forever:server:stop"]
   return
