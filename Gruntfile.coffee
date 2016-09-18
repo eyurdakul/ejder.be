@@ -6,15 +6,20 @@ module.exports = (grunt)->
       style:
         files: ["**/*.scss"]
         tasks: ["clean:style", "clean:media", "copy", "compass", "cssmin"]
-      script:
-        files: ["**/*.coffee"]
-        tasks: ["clean:script", "coffee", "uglify", "copy"]
+      frontjs:
+        files: ["#{__dirname}/src/scripts/**/*.coffee"]
+        tasks: ["clean:script:front", "coffee:front", "uglify", "copy"]
+      backjs:
+        files: ["#{__dirname}/src/app/**/*.coffee"]
+        tasks: ["clean:script:back", "coffee:back", "exec:restart_server"]
       content:
         files: ["#{__dirname}/src/app/data/**/*.json"]
         tasks: ["copy:content"]
     clean:
       style: ["#{__dirname}/frontend/styles/*"]
-      script: ["#{__dirname}/frontend/scripts/*", "#{__dirname}/backend/*"]
+      script:
+        front: ["#{__dirname}/frontend/scripts/*"]
+        back: ["#{__dirname}/backend/*"]
       media: ["#{__dirname}/frontend/media/*"]
       sources: ["#{__dirname}/frontend/styles/*.css", "#{__dirname}/frontend/scripts/all.js"]
     copy:
@@ -48,11 +53,12 @@ module.exports = (grunt)->
           join: true
         files:
           "frontend/scripts/all.js":[
-            "#{__dirname}/src/scripts/services/*.coffee"
-            "#{__dirname}/src/scripts/directives/*.coffee"
             "#{__dirname}/src/scripts/controllers/*.coffee"
+            "#{__dirname}/src/scripts/directives/*.coffee"
             "#{__dirname}/src/scripts/factories/*.coffee"
-            "#{__dirname}/src/scripts/app.coffee"]
+            "#{__dirname}/src/scripts/services/*.coffee"
+            "#{__dirname}/src/scripts/app.coffee"
+          ]
       back:
         expand: true
         flatten: false
@@ -92,10 +98,10 @@ module.exports = (grunt)->
         ]
         options:
           directory: "./bower_components"
-    forever:
-      server:
-        options:
-          index: "#{__dirname}/backend/server.js"
+    exec:
+      start_server: "forever start backend/server.js"
+      restart_server: "forever restart backend/server.js"
+      stop_server: "forever stopall"
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-copy"
@@ -106,9 +112,8 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-wiredep"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-coffeelint"
-  grunt.loadNpmTasks "grunt-forever"
+  grunt.loadNpmTasks "grunt-exec"
 
-  grunt.registerTask "dev", ["coffeelint", "clean", "copy", "coffee", "compass", "wiredep", "forever:server:start", "watch"]
-  grunt.registerTask "dist", ["clean", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "clean:sources", "forever:server:start"]
-  grunt.registerTask "stop", ["forever:server:stop"]
+  grunt.registerTask "dev", ["exec:stop_server", "coffeelint", "clean", "copy", "coffee", "compass", "wiredep", "exec:start_server", "watch"]
+  grunt.registerTask "dist", ["exec:stop_server", "clean", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "clean:sources", "exec:start_server"]
   return
