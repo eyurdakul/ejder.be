@@ -108,7 +108,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-coffeelint"
   grunt.loadNpmTasks "grunt-forever"
 
-  grunt.registerTask "dev", ["coffeelint", "clean", "copy", "coffee", "compass", "wiredep", "watch", "forever:server:restart"]
-  grunt.registerTask "dist", ["clean", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "clean:sources", "forever:server:restart"]
+  grunt.registerTask "dev", ["coffeelint", "clean", "copy", "coffee", "compass", "wiredep", "forever:server:start", "watch"]
+  grunt.registerTask "dist", ["clean", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "clean:sources", "forever:server:start"]
   grunt.registerTask "stop", ["forever:server:stop"]
   return
