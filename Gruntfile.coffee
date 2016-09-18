@@ -8,7 +8,7 @@ module.exports = (grunt)->
         tasks: ["clean:style", "clean:media", "copy", "compass", "cssmin"]
       frontjs:
         files: ["#{__dirname}/src/scripts/**/*.coffee"]
-        tasks: ["clean:script:front", "coffee:front", "uglify", "copy"]
+        tasks: ["clean:script:front", "coffee:front", "copy"]
       backjs:
         files: ["#{__dirname}/src/app/**/*.coffee"]
         tasks: ["clean:script:back", "coffee:back", "exec:restart_server"]
