@@ -1,18 +1,19 @@
 //paths
-$font-path: "../../media/fonts/";
-$svg-path: "../../media/svg/";
-$img-path: "../../media/content/";
+$font-path: "../media/fonts/";
+$svg-path: "../media/svg/";
+$img-path: "../media/content/";
 //ainmation
 $animation-duration: 0.5s;
 $animation-easing: ease-in-out;
+//layout
+$navigation-height: 80px;
+$mobile-navigation-height: 60px;
+$base-gap-large: 8px;
+$base-gap-regular: 5px;
 //colors
-$color-white: #F5F5F5;
-$color-text: #262626;
-$color-dark-grey: #262626;
-$color-muted-blue: #05212D;
-$color-muted-blue-dark: #061C26;
-$color-black: #000001;
-$color-orange: #FF7300;
-$color-red: #FF1A00;
-$color-blue: #4095EF;
-$color-green: #008C00;
+$color-white: #F9F9F9;
+$color-yellow: #FF9D26;
+$color-orange: #FF5A26;
+$color-green: #1BB667;
+$color-blue: #2074A6;
+$color-dark-blue: #064970;

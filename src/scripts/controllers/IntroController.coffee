@@ -8,6 +8,7 @@ IntroController = [
     $log.debug "Creating IntroController"
 
     $scope.loaded = undefined
+    $scope.int = 2
 
     @
 ]

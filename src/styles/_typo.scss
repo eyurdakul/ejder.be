@@ -1,12 +1,2 @@
-@include fontify(titanone, titanone);
-@include fontify(fontin, fontin);
-@include fontify(fontinbold, fontinbold);
-html{
-  color: $color-text;
-  text-rendering: optimizeLegibility;
-  body{
-    h1, h2, h3{
-      font-family: fontin;
-    }
-  }
-}
+@include font-face(Dosis-Regular, Dosis);
+@include font-face(OpenSans, OpenSans);

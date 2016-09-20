@@ -7,7 +7,7 @@
   -o-transition: $duration $ease;
   transition: $duration $ease;
 }
-@mixin fontify($font-name, $font-family, $font-weight:normal, $font-style: normal, $font-stretch: normal){
+@mixin font-face($font-name, $font-family, $font-weight:normal, $font-style: normal, $font-stretch: normal){
   @font-face{
     font-family: "#{$font-family}";
     src: url("#{$font-path}#{$font-name}/#{$font-name}.eot");
@@ -36,85 +36,8 @@
   height: 100%;
   display: block;
 }
-@mixin shadowy(){
+@mixin shadow(){
   -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
   -moz-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
-}
-@mixin balloon($direction, $width, $height, $arrow-size, $background-color){
-  border-radius: 4%;
-  position: relative;
-  height: $height;
-  width: $width;
-  background: $background-color;
-  &:after{
-    content: " ";
-    position: absolute;
-    height: 0;
-    width: 0;
-    @if $direction == sw{
-      bottom: -$arrow-size;
-      left: 10%;
-      border-bottom: $arrow-size/2 solid transparent;
-      border-right: $arrow-size/2 solid transparent;
-      border-top: $arrow-size/2 solid $background-color;
-      border-left: $arrow-size/2 solid $background-color;
-    }
-    @if $direction == s{
-      bottom: -$arrow-size;
-      left: 50%;
-      border-bottom: $arrow-size/2 solid transparent;
-      border-right: $arrow-size/2 solid transparent;
-      border-top: $arrow-size/2 solid $background-color;
-      border-left: $arrow-size/2 solid transparent;
-    }
-    @if $direction == se{
-      bottom: -$arrow-size;
-      right: 10%;
-      border-bottom: $arrow-size/2 solid transparent;
-      border-right: $arrow-size/2 solid $background-color;
-      border-top: $arrow-size/2 solid $background-color;
-      border-left: $arrow-size/2 solid transparent;
-    }
-    @if $direction == nw{
-      top: -$arrow-size;
-      left: 10%;
-      border-bottom: $arrow-size/2 solid $background-color;
-      border-right: $arrow-size/2 solid transparent;
-      border-top: $arrow-size/2 solid transparent;
-      border-left: $arrow-size/2 solid $background-color;
-    }
-    @if $direction == n{
-      top: -$arrow-size;
-      left: 50%;
-      border-bottom: $arrow-size/2 solid $background-color;
-      border-right: $arrow-size/2 solid transparent;
-      border-top: $arrow-size/2 solid transparent;
-      border-left: $arrow-size/2 solid transparent;
-    }
-    @if $direction == ne{
-      top: -$arrow-size;
-      right: 10%;
-      border-bottom: $arrow-size/2 solid $background-color;
-      border-right: $arrow-size/2 solid $background-color;
-      border-top: $arrow-size/2 solid transparent;
-      border-left: $arrow-size/2 solid transparent;
-    }
-    @if $direction == e{
-      bottom: 50%;
-      right: -$arrow-size;
-      border-bottom: $arrow-size/2 solid transparent;
-      border-right: $arrow-size/2 solid transparent;
-      border-top: $arrow-size/2 solid transparent;
-      border-left: $arrow-size/2 solid $background-color;
-    }
-    @if $direction == w{
-      bottom: 50%;
-      left: -$arrow-size;
-      border-bottom: $arrow-size/2 solid transparent;
-      border-right: $arrow-size/2 solid $background-color;
-      border-top: $arrow-size/2 solid transparent;
-      border-left: $arrow-size/2 solid transparent;
-    }
-  }
 }

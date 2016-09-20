@@ -1,7 +1,7 @@
 express = require "express"
 http = require "http"
 jade = require "jade"
-path = require "path"
+fs = require "fs"
 
 class Bootstrap
   _self = undefined
@@ -21,13 +21,14 @@ class Bootstrap
 
   constructor: ->
     _self = @
-    @isDev = path.existsSync @options.isDev
+    @isDev = fs.existsSync @options.isDev
     @app = express()
 
     @server = http.Server @app
     @server.listen @options.socketPort
     @io = require("socket.io")(@server)
     @socketConnector = require("./live.js")
+
     @logger = require("./logger.js")
     @logger.init @isDev
 
