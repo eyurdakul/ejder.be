@@ -1,13 +1,58 @@
 html{
   @include global-reset();
+  text-rendering: optimizeLegibility;
   body {
     .safe-container{
       position: relative;
+      background-color: $color-white;
       @include full-height();
+      .main-navigation{
+        height: $navigation-height;
+        display: flex;
+        position: relative;
+        &__item{
+          @include transition();
+          &--active{
+            @include shadow();
+            span{
+              transform: rotate(180deg);
+            }
+          }
+          &-link{
+            color: $color-white;
+            @include font-size(1.2);
+            font-family: Dosis;
+            text-decoration: none;
+            position: absolute;
+            right: $base-gap-large;
+            bottom: $base-gap-large;
+            span{
+              vertical-align: bottom;
+              margin-left: $base-gap-regular;
+              @include transition();
+            }
+          }
+          &:nth-child(1){
+            background-color: $color-yellow;
+          }
+          &:nth-child(2){
+            background-color: $color-blue;
+          }
+          &:nth-child(3){
+            background-color: $color-green;
+          }
+          &:nth-child(4){
+            background-color: $color-orange;
+          }
+        }
+        &__links{
+          background-color: $color-dark-blue;
+        }
+      }
       .stage{
         @include transition();
         position: absolute;
-        top: 40px;
+        top: 80px;
         bottom: 0;
         left: 0;
         display: flex;
@@ -28,16 +73,16 @@ html{
           flex: 1;
         }
         .intro{
-          background: red;
+          //background: red;
         }
         .clients{
-          background: blue;
+          //background: blue;
         }
         .skills{
-          background: mediumpurple;
+          //background: mediumpurple;
         }
         .contact{
-          background: yellowgreen;
+          //background: yellowgreen;
         }
       }
     }
