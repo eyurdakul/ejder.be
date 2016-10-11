@@ -2,7 +2,6 @@ html{
   @include global-reset();
   text-rendering: optimizeLegibility;
   body {
-    overflow: hidden;
     font-family: OpenSans;
 
     a:not(.main-navigation__item) {

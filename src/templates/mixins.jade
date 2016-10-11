@@ -8,11 +8,19 @@ mixin nav-button()
         .main-navigation__item-link
             block
 
-mixin nav-button-mobile(link)
-    li(
-        role="menuitem"
-    )&attributes(attributes)
-        a(href=link)
+mixin nav-side-button(href, icon, text)
+    a(
+        href=href
+        target="_blank"
+    )
+        i(
+            class=icon
+         )
+        span #{text}
+
+mixin nav-button-mobile()
+    a.col-xs-12.col-sm-6.main-navigation__item&attributes(attributes)
+        .main-navigation__item-link
             block
 
 mixin svg-image(svgName)
