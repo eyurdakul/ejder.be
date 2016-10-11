@@ -4,7 +4,7 @@
 -var svgPath = "/frontend/media/svg/"
 
 mixin nav-button()
-    a.col-md-3.col-lg-2.main-navigation__item&attributes(attributes)
+    a.col-sm-6.col-md-3.col-lg-2.main-navigation__item&attributes(attributes)
         .main-navigation__item-link
             block
 
@@ -17,11 +17,6 @@ mixin nav-side-button(href, icon, text)
             class=icon
          )
         span #{text}
-
-mixin nav-button-mobile()
-    a.col-xs-12.col-sm-6.main-navigation__item&attributes(attributes)
-        .main-navigation__item-link
-            block
 
 mixin svg-image(svgName)
     img.img-responsive(

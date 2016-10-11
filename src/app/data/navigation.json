@@ -4,5 +4,8 @@
     {"target": "#clients", "path":"/clients", "text": "Projects", "active": false},
     {"target": "#skills", "path":"/skills", "text": "Skills", "active": false},
     {"target": "#contact", "path":"/contact", "text": "Contact", "active": false}
+  ],
+  "external": [
+    {"icon":"devicon-github-plain", "text":"view the source on github", "href":"http://github.com/eyurdakul/ejder.be"}
   ]
 }

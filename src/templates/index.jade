@@ -9,36 +9,18 @@ html(lang="en")
                     ng-controller="NavigationController"
                     ng-init="init()"
                 )
-                    .row.visible-lg.visible-md
+                    .row
                         +nav-button()(
                             ng-repeat="link in links"
                             ng-class="{'main-navigation__item--active':(link.path == activeLink)}"
                             href="{{link.target}}"
                         )
                             | {{link.text}}
-                        .col-lg-4.hidden-md.main-navigation__links
+                        .col-xs-12.col-lg-4.main-navigation__links
                             +nav-side-button("http://github.com/eyurdakul/ejder.be", "devicon-github-plain", "view the source on github")
                             a(
                                 href="http://github.com/eyurdakul/ejder.be"
                                 target="_blank"
-                            )
-                                i.devicon-github-plain
-                                span view the source on github
-
-                                // codepen linkedin playstore maybe facebook twitter and put those in the footer fl-icon-linkedin
-                    .row.visible-xs.visible-sm
-                        +nav-button-mobile()(
-                            ng-repeat="link in links"
-                            ng-class="{'main-navigation__item--active':(link.path == activeLink)}"
-                            href="{{link.target}}"
-                        )
-                            | {{link.text}}
-                    .row.hidden-lg
-                        .col-xs-12.main-navigation__links
-                            +nav-side-button("http://github.com/eyurdakul/ejder.be", "devicon-github-plain", "view the source on github")
-                            a(
-                            href="http://github.com/eyurdakul/ejder.be"
-                            target="_blank"
                             )
                                 i.devicon-github-plain
                                 span view the source on github
