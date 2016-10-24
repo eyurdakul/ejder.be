@@ -1,15 +1,24 @@
 //
    Created by ejder on 10/25/2014.
 
+-var svgPath = "/frontend/media/svg/"
+
 mixin nav-button()
-    a.col-md-3.col-lg-2.hidden-xs.hidden-sm.main-navigation__item&attributes(attributes)
+    a.col-sm-6.col-md-3.col-lg-2.main-navigation__item&attributes(attributes)
         .main-navigation__item-link
             block
-            span.glyphicon.glyphicon-menu-up
 
-mixin nav-button-mobile(link)
-    li(
-        role="menuitem"
-    )&attributes(attributes)
-        a(href=link)
-            block
+mixin nav-side-button(href, icon, text)
+    a(
+        href=href
+        target="_blank"
+    )
+        i(
+            class=icon
+         )
+        span #{text}
+
+mixin svg-image(svgName)
+    img.img-responsive(
+        src=svgPath+svgName
+    )

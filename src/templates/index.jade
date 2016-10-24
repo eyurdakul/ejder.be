@@ -3,32 +3,28 @@ doctype "html"
 html(lang="en")
     include partials/head
     body(ng-app="EjderBe", ng-strict-di)
-        .safe-container
-            .main-navigation(
-                ng-controller="NavigationController"
-                ng-init="init()"
-            )
-                +nav-button()(
-                    ng-repeat="link in links"
-                    ng-class="{'main-navigation__item--active':(link.path == activeLink)}"
-                    href="{{link.target}}"
+        .safe-container.container-fluid
+            .row
+                .main-navigation.col-xs-12(
+                    ng-controller="NavigationController"
+                    ng-init="init()"
                 )
-                    | {{link.text}}
-                .visible-xs.visible-sm.col-xs-12.col-sm-12(uib-dropdown)
-                    button#mobile_navigation.btn.btn-primary(
-                        type="button"
-                        uib-dropdown-toggle
-                    ) Menu
-                        span.glyphicon.glyphicon-menu-hamburger
-                    ul.dropdown-menu(
-                        uib-dropdown-menu
-                        role="menu"
-                        aria-labelledby="mobile_navigation"
-                    )
-                        +nav-button-mobile("{{link.target}}")(ng-repeat="link in links")
+                    .row
+                        +nav-button()(
+                            ng-repeat="link in links"
+                            ng-class="{'main-navigation__item--active':(link.path == activeLink)}"
+                            href="{{link.target}}"
+                        )
                             | {{link.text}}
-                .clearfix.hidden-lg
-                .col-xs-12.col-sm-12.col-md-12.col-lg-4.main-navigation__links
-                    p extra links will be here
-                .clearfix.visible-lg
-            section.stage(ng-view)
+                        .col-xs-12.col-lg-4.main-navigation__links
+                            +nav-side-button("http://github.com/eyurdakul/ejder.be", "devicon-github-plain", "view the source on github")
+                            a(
+                                href="http://github.com/eyurdakul/ejder.be"
+                                target="_blank"
+                            )
+                                i.devicon-github-plain
+                                span view the source on github
+
+                                // codepen linkedin playstore maybe facebook twitter and put those in the footer fl-icon-linkedin
+            .row
+                section.col-xs-12.stage(ng-view)

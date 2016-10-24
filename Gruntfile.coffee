@@ -82,7 +82,7 @@ module.exports = (grunt)->
     cssmin:
       build:
         files:
-          "frontend/styles/min/main.min.css":["#{__dirname}/frontend/styles/*.css"]
+          "frontend/styles/min/main.min.css": ["#{__dirname}/frontend/styles/*.css"]
     uglify:
       build:
         files: [
