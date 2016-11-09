@@ -4,21 +4,38 @@
 -var svgPath = "/frontend/media/svg/"
 
 mixin nav-button()
-    a.col-sm-6.col-md-3.col-lg-2.main-navigation__item&attributes(attributes)
+    a.col-xs-6.col-sm-3.col-md-2.main-navigation__item&attributes(attributes)
         .main-navigation__item-link
             block
 
-mixin nav-side-button(href, icon, text)
-    a(
-        href=href
-        target="_blank"
+mixin icon(iconName)
+    i.fa(
+        class="fa-"+iconName
+        aria-hidden="true"
     )
-        i(
-            class=icon
-         )
-        span #{text}
+
+mixin glyph(iconName)
+    i.glyphicon(
+        class="glyphicon-"+iconName
+        aria-hidden="true"
+    )
 
 mixin svg-image(svgName)
-    img.img-responsive(
-        src=svgPath+svgName
+    object.img-responsive.auto-scale-to-parent&attributes(attributes)(
+        type="image/svg+xml"
+        data=svgPath+svgName+".svg"
     )
+
+mixin svg-static(svgName)
+    img.img-responsive.auto-scale-to-parent&attributes(attributes)(
+        src=svgPath+svgName+".svg"
+    )
+
+mixin iconed-link(href, iconName, text)
+    a&attributes(attributes)(
+        href=href
+        target="_blank"
+        alt=text
+    )
+        +icon(iconName)
+        .info-text #{text}

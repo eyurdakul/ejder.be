@@ -1,2 +1,13 @@
+include mixins
 .container-fluid.intro
-    p intro template
+    .row.intro__wrapper
+        .col-sm-12.col-lg-6
+            .intro__image-container
+                +svg-image("Intro")
+        .col-sm-12.col-lg-6
+            .intro__text-container
+                .intro__text-wrapper
+                    h1.intro__header Ejder Yurdakul
+                    h3.intro__sub-header is a freelance Senior Full Stack developer
+                    p.intro__text who loves to write amazing stuff, create solid rock user interfaces and take the challenges!..
+                    .intro__additional-info Please refer to the #[a(href="#/contact") contact page] for more information such as availability and daily rate.

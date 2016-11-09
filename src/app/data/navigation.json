@@ -5,7 +5,9 @@
     {"target": "#skills", "path":"/skills", "text": "Skills", "active": false},
     {"target": "#contact", "path":"/contact", "text": "Contact", "active": false}
   ],
-  "external": [
-    {"icon":"devicon-github-plain", "text":"view the source on github", "href":"http://github.com/eyurdakul/ejder.be"}
+  "externalLinks": [
+    {"href":"https://github.com/eyurdakul/ejder.be", "icon":"github-alt", "text":"View the source on github"},
+    {"href":"http://be.linkedin.com/in/ejder-yurdakul-35188649", "icon":"linkedin-square", "text":"Check my LinkedIn profile"},
+    {"href":"https://twitter.com/intent/tweet?url=http%3A%2F%2Fejder.be&via=eyurdakul", "icon":"twitter-square", "text":"Tweet about this site"}
   ]
 }

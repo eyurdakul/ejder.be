@@ -1,0 +1,21 @@
+$svg-animation-duration: 15s;
+.intro__star--yellow{
+  animation: turn-clockwise $svg-animation-duration infinite;
+  transform-origin: unset;
+  animation-timing-function: linear;
+}
+.intro__star--blue{
+  animation: turn-counter-clockwise $svg-animation-duration infinite;
+  transform-origin: unset;
+  animation-timing-function: linear;
+}
+@keyframes turn-clockwise{
+  0% {transform: rotate(0deg); opacity: 0;}
+  50% {transform: rotate(180deg);  opacity: 0.5;}
+  100% {transform: rotate(360deg);  opacity: 0;}
+}
+@keyframes turn-counter-clockwise{
+  0% {transform: rotate(0deg); opacity: 0.5;}
+  50% {transform: rotate(-180deg); opacity: 0;}
+  100% {transform: rotate(-360deg); opacity: 0.5;}
+}

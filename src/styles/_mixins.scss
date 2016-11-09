@@ -26,18 +26,39 @@
   font-size: $sizeValue + rem;
   line-height: $lineValue + rem;
 }
-@mixin font-size-perc($sizeValue, $fallbackValue : 36){
-  font-size: $fallbackValue+px;
-  font-size: $sizeValue+vh;
-  line-height: $sizeValue+vh;
-}
 @mixin full-height(){
   min-height: 100%;
   height: 100%;
-  display: block;
 }
 @mixin shadow(){
   -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
   -moz-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.45);
+}
+@mixin media-query($size){
+  @if $size == lg{
+    @media screen and (min-width: $screen-lg){
+      @content
+    }
+  }
+  @if $size == md{
+    @media screen and (max-width: $screen-lg){
+      @content
+    }
+  }
+  @if $size == sm{
+    @media screen and (max-width: $screen-md){
+      @content
+    }
+  }
+  @if $size == xs{
+    @media screen and (max-width: $screen-sm){
+      @content
+    }
+  }
+}
+@mixin center-vh(){
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
