@@ -1,6 +1,8 @@
 "use strict"
 SocketService = ["$log", ($log)->
 
+  $log.debug "Creating SocketService"
+
   CONSTANTS =
     connectionPort: ":400"
     protocolSuffix: "//"

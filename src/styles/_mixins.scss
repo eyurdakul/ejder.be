@@ -57,8 +57,24 @@
     }
   }
 }
+@mixin media-query-min-max($min, $max){
+  @if($min){
+    @media screen and (min-width: $min) and (max-width: $max){
+      @content
+    }
+  }@else{
+    @media screen and (max-width: $max){
+      @content
+    }
+  }
+}
 @mixin center-vh(){
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@mixin center-v(){
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 }

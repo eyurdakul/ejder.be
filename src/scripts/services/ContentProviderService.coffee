@@ -24,14 +24,14 @@ ContentProviderService = [
 
     get = (model)->
       return unless model
-      deferred = $q.defer()
       if not content[model]
+        deferred = $q.defer()
         promises[model] = deferred
         SocketService.emit CONSTANTS.eventQuery,
           model: model
+        return deferred.promise
       else
-        deferred.notify content[model]
-      deferred.promise
+        return $q.when content[model]
 
     SocketService.registerCallback CONSTANTS.eventResult, onData
     SocketService.registerCallback CONSTANTS.eventUpdate, onUpdate

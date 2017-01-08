@@ -9,7 +9,7 @@ mixin nav-button()
             block
 
 mixin icon(iconName)
-    i.fa(
+    i.fa&attributes(attributes)(
         class="fa-"+iconName
         aria-hidden="true"
     )
@@ -39,3 +39,7 @@ mixin iconed-link(href, iconName, text)
     )
         +icon(iconName)
         .info-text #{text}
+
+mixin loading()
+    .loading.modal&attributes(attributes)
+        +icon("circle-o-notch").fa-spin.loading__spin

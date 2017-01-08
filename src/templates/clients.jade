@@ -1,2 +1,13 @@
-.container-fluid.clients
-    p clients template
+include mixins
+.container-fluid.clients(ng-init="init()")
+    .row.generic__wrapper
+        .col-sm-12.col-lg-6
+            .generic__image-container
+                +svg-image("Projects")
+        .col-sm-12.col-lg-6
+            .intro__text-container
+                .intro__text-wrapper
+                    h1.intro__header qsd
+                    h3.intro__sub-header qsdsqd
+                    p.intro__text qsdqs
+                    .intro__additional-info(ng-bind-html="data.summary")

@@ -1,5 +1,5 @@
 "use strict"
-app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "ngAnimate"]
+app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "ngAnimate", "ngSanitize"]
 
 #controllers
 app.controller "NavigationController", NavigationController
@@ -12,12 +12,13 @@ app.controller "ContactController", ContactController
 #services
 app.service "ContentProviderService", ContentProviderService
 app.service "SocketService", SocketService
+app.service "SpinnerService", SpinnerService
 
 #factories
 app.factory "ErrorLogFactory", ErrorLogFactory
 
 #directives
-#TODO loading directive, send message directive
+app.directive "loadingModal", LoadingModalDirective
 
 app.provider "$exceptionHandler",
   $get: ["ErrorLogFactory", (ErrorLogFactory)->

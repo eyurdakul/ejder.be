@@ -50,7 +50,7 @@ class Bootstrap
       view = request.param "view"
       response.render view
     @app.get @routes.DIRECTIVE_PATH, (request, response)->
-      template = request.param "template"
+      template = request.param("template").replace ".html", ""
       response.render "directives/"+template
     @app.use (request, response, next)->
       _self.logger.warning "404 Not Found!: " + request.originalUrl

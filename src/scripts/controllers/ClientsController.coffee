@@ -2,11 +2,24 @@
 ClientsController = [
   "$scope"
   "$log"
-  ($scope, $log)->
+  "ContentProviderService"
+  "SpinnerService"
+  ($scope, $log, ContentProviderService, SpinnerService)->
 
     $log.debug "Creating ClientsController"
 
-    $scope.loaded = undefined
+    $scope.data = undefined
+
+    $scope.init = ->
+      SpinnerService.setLoading true
+      ContentProviderService.get("clients")
+      .then handleData, null, handleData
+      true
+
+    handleData = (response)->
+      console.log response
+      $scope.data = response
+      SpinnerService.setLoading false
 
     @
 ]

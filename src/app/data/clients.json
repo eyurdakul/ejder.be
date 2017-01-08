@@ -1,0 +1,12 @@
+{
+  "clients": [
+    {
+      "name": "KBC",
+      "project": "KBC Touch",
+      "description": "KBC Touch is an online banking application",
+      "technologies": [
+        {"name":"Angular", "icon":"angular"}
+      ]
+    }
+  ]
+}

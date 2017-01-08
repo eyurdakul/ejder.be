@@ -14,6 +14,15 @@ html{
       }
     }
 
+    .loading{
+      background-color: $color-blue;
+      @include center-vh();
+      &__spin{
+        color: $color-white;
+        @include font-size(3);
+        opacity: 0.6;
+      }
+    }
     .safe-container {
       .main-navigation {
         height: $navigation-height;
@@ -120,6 +129,7 @@ html{
       .stage {
         @include transition();
         position: absolute;
+        overflow: auto;
         bottom: 0;
         left: 0;
         display: flex;
@@ -146,17 +156,29 @@ html{
         > .container-fluid {
           flex: 1;
         }
-        .intro{
+        .generic{
           &__wrapper{
             @include full-height();
           }
           &__image-container{
-            @include full-height();
-            @include center-vh();
+            @include media-query(lg){
+              @include full-height();
+              @include center-vh();
+            }
+            @include media-query-min-max(null, $screen-lg){
+              @include center-v();
+            }
           }
+        }
+        .intro{
           &__text-container{
-            @include full-height();
-            @include center-vh();
+            @include media-query(lg){
+              @include full-height();
+              @include center-vh();
+            }
+            @include media-query-min-max(null, $screen-lg){
+              @include center-v();
+            }
           }
           &__header{
             color: $color-orange;

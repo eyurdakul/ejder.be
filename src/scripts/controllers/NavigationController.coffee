@@ -24,7 +24,6 @@ NavigationController = [
 
     handleData = (response)->
       $scope.data = response
-      $log.debug $scope.data.external
 
     @
 ]

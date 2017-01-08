@@ -1,8 +1,6 @@
 {
-  "name": {
-    "first": "Ejder",
-    "last": "Yurdakul"
-  },
-  "title": "full stack developer",
-  "summary": "at the same time a chilly grower,<br/> a reptile bearer,<br/> a beer drinker<br/> and a professional husband."
+  "name": "Ejder Yurdakul",
+  "title": "is a freelance Senior Full Stack developer",
+  "moreabout": "who loves to write amazing stuff, create solid rock user interfaces and take the challenges!..",
+  "summary":"Please refer to the <a href='#/contact'>contact page</a> for more information such as availability and daily rate."
 }
