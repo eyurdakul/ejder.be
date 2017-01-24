@@ -1,0 +1,10 @@
+.idea/
+node_modules
+bower_components
+.sass-cache
+forever
+frontend
+backend
+assets
+dev
+error.log

@@ -9,7 +9,7 @@ NavigationController = [
     $log.debug "Creating NavigationController"
 
     $scope.navigationLoaded = undefined
-    $scope.links = undefined
+    $scope.data = undefined
     $scope.activeLink = undefined
 
     $scope.$on "$routeChangeSuccess", ->
@@ -23,7 +23,7 @@ NavigationController = [
       true
 
     handleData = (response)->
-      $scope.links = response.links
+      $scope.data = response
 
     @
 ]

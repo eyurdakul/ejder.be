@@ -4,8 +4,14 @@ $svg-path: "../media/svg/";
 $img-path: "../media/content/";
 //ainmation
 $animation-duration: 0.5s;
+$animation-duration-slow: 5s;
 $animation-easing: ease-in-out;
+//breakpoints
+$screen-lg: 1200px;
+$screen-md: 992px;
+$screen-sm: 768px;
 //typography
+$font-size-huge: 3.20;
 $font-size-xl: 1.57;
 $font-size-l: 1.14;
 $font-size-m: 0.85;
@@ -13,16 +19,20 @@ $font-size-s: 0.71;
 $font-size-xs: 0.57;
 //layout
 $navigation-height: 80px;
-$navigation-item-height: 70px;
-$mobile-navigation-height: 60px;
+$footer-height: 220px;
+$mobile-navigation-height: 40px;
+$base-gap-huge: 40px;
+$base-gap-largest: 20px;
 $base-gap-larger: 10px;
 $base-gap-large: 8px;
 $base-gap-regular: 5px;
+$base-gap-tiny: 4px;
+$base-gap-micro: 2px;
 //colors
 $color-white: #F9F9F9;
 $color-yellow: #FF9D26;
-$color-orange: #FF5A26;
+$color-orange: #FF3914;
 $color-green: #1BB667;
 $color-blue: #2074A6;
-$color-highlight: #76b100;
-$color-dark-est: #222;
+$color-highlight: #9aff00;
+$color-dark-est: #444751;

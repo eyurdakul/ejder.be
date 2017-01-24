@@ -7,7 +7,8 @@ class Bootstrap
   _self = undefined
   routes:
     DEFAULT_PATH: "/"
-    TEMPLATE_PATH: "/load/:model"
+    TEMPLATE_PATH: "/load/:view"
+    DIRECTIVE_PATH: "/directive/:template"
   options:
     templatePath: "#{__dirname}/../src/templates"
     isDev: "#{__dirname}/../dev"
@@ -46,8 +47,11 @@ class Bootstrap
           isDev: _self.isDev
       response.render "index", appData
     @app.get @routes.TEMPLATE_PATH, (request, response)->
-      model = request.param "model"
-      response.render model
+      view = request.param "view"
+      response.render view
+    @app.get @routes.DIRECTIVE_PATH, (request, response)->
+      template = request.param("template").replace ".html", ""
+      response.render "directives/"+template
     @app.use (request, response, next)->
       _self.logger.warning "404 Not Found!: " + request.originalUrl
       response.status(_self.options.status.notFound)

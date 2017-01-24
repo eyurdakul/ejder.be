@@ -15,6 +15,9 @@ module.exports = (grunt)->
       content:
         files: ["#{__dirname}/src/app/data/**/*.json"]
         tasks: ["copy:content"]
+      media:
+        files: ["#{__dirname}/src/media/**/*.*"]
+        tasks: ["clean:media", "copy:media"]
     clean:
       style: ["#{__dirname}/frontend/styles/*"]
       script:
@@ -36,6 +39,15 @@ module.exports = (grunt)->
             cwd: "#{__dirname}/src/app/data/"
             src: "*.json"
             dest: "#{__dirname}/backend/data/"
+          )
+        ]
+      media:
+        files: [
+          (
+            expand: true
+            cwd: "#{__dirname}/src/media/"
+            src: ["*", "**"]
+            dest: "#{__dirname}/frontend/media/"
           )
         ]
       content:

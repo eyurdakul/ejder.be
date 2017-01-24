@@ -3,6 +3,7 @@ doctype "html"
 html(lang="en")
     include partials/head
     body(ng-app="EjderBe", ng-strict-di)
+        loading-modal
         .safe-container.container-fluid
             .row
                 .main-navigation.col-xs-12(
@@ -11,20 +12,26 @@ html(lang="en")
                 )
                     .row
                         +nav-button()(
-                            ng-repeat="link in links"
+                            ng-repeat="link in data.links"
                             ng-class="{'main-navigation__item--active':(link.path == activeLink)}"
                             href="{{link.target}}"
                         )
                             | {{link.text}}
-                        .col-xs-12.col-lg-4.main-navigation__links
-                            +nav-side-button("http://github.com/eyurdakul/ejder.be", "devicon-github-plain", "view the source on github")
-                            a(
-                                href="http://github.com/eyurdakul/ejder.be"
-                                target="_blank"
-                            )
-                                i.devicon-github-plain
-                                span view the source on github
-
-                                // codepen linkedin playstore maybe facebook twitter and put those in the footer fl-icon-linkedin
+                        .col-xs-12.col-md-4.side-bar
+                            .side-bar__link-wrapper.pull-left(ng-repeat="externalLink in data.externalLinks")
+                                +iconed-link("{{externalLink.href}}", "{{externalLink.icon}}", "{{externalLink.text}}").side-bar__link
             .row
                 section.col-xs-12.stage(ng-view)
+            footer.col-xs-12.footer(
+                ng-controller="FooterController"
+                ng-class="{'footer_collapsed':collapsed}"
+            )
+                .footer__wrapper
+                    .footer__handler(
+                        ng-click="toggle()"
+                    )
+                        span(ng-if="collapsed")
+                            +glyph("chevron-up")
+                        span(ng-if="!collapsed")
+                            +glyph("chevron-down")
+                    p some content comes here specialy the links to my codepen, linkedin, etc

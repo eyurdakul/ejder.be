@@ -3,6 +3,7 @@ html{
   text-rendering: optimizeLegibility;
   body {
     font-family: OpenSans;
+    overflow: hidden;
 
     a:not(.main-navigation__item) {
       @include transition();
@@ -13,9 +14,21 @@ html{
       }
     }
 
+    .loading{
+      background-color: $color-blue;
+      @include center-vh();
+      &__spin{
+        color: $color-white;
+        @include font-size(3);
+        opacity: 0.6;
+      }
+    }
     .safe-container {
       .main-navigation {
         height: $navigation-height;
+        @include media-query(sm){
+          height: $mobile-navigation-height;
+        }
         position: relative;
 
         &__item {
@@ -27,11 +40,11 @@ html{
           }
           &-link {
             color: $color-white;
-            @include font-size(1.2);
+            @include font-size($font-size-l);
             font-family: DosisBold;
             text-decoration: none;
             position: absolute;
-            right: $base-gap-large;
+            right: $base-gap-largest;
             bottom: $base-gap-large;
 
             &::before, &::after {
@@ -65,20 +78,50 @@ html{
             background-color: $color-orange;
           }
         }
-        &__links {
+        .side-bar{
           background-color: $color-dark-est;
+          padding-left: $base-gap-regular;
+          display: flex;
+          position: relative;
+          justify-content: flex-start;
+          align-items: center;
           @include full-height();
-          padding: $base-gap-larger;
+          @include media-query(sm){
+            justify-content: center;
+          }
 
-          > a {
-            color: $color-white;
-            @include font-size($font-size-m);
-
-            i {
-              color: $color-highlight;
+          &__link-wrapper{
+            height: $navigation-height - $base-gap-huge;
+            width: $navigation-height - $base-gap-huge;
+            margin: $base-gap-regular;
+            border: 1px solid $color-white;
+            border-radius: 50%;
+            @include center-vh();
+            @include media-query(sm){
+              height: $mobile-navigation-height - $base-gap-largest;
+              width: $mobile-navigation-height - $base-gap-largest;
+              margin: $base-gap-tiny;
             }
-            span {
-              padding-left: $base-gap-regular;
+          }
+          &__link{
+            color: $color-white;
+            @include font-size($font-size-l);
+            @include media-query(sm){
+              @include font-size($font-size-s);
+            }
+            > .info-text{
+              @include font-size($font-size-s);
+              opacity: 0;
+              position: absolute;
+              max-width: 35%;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              left: $base-gap-regular;
+              bottom: $base-gap-micro;
+            }
+            &:hover > .info-text{
+              opacity: 1;
             }
           }
         }
@@ -86,12 +129,16 @@ html{
       .stage {
         @include transition();
         position: absolute;
-        top: 80px;
+        overflow: auto;
         bottom: 0;
         left: 0;
         display: flex;
         width: 100%;
+        top: $navigation-height;
 
+        @include media-query(xs){
+          top: ($mobile-navigation-height*3);
+        }
         &.ng-enter {
           left: -100%;
 
@@ -109,17 +156,81 @@ html{
         > .container-fluid {
           flex: 1;
         }
+        .generic{
+          &__wrapper{
+            @include full-height();
+          }
+          &__image-container{
+            @include media-query(lg){
+              @include full-height();
+              @include center-vh();
+            }
+            @include media-query-min-max(null, $screen-lg){
+              @include center-v();
+            }
+          }
+          &__header{
+            color: $color-orange;
+            @include font-size($font-size-huge);
+            font-family: DosisBold;
+          }
+          &__sub-header{
+            @include font-size($font-size-xl);
+            padding: $base-gap-larger 0;
+            color: $color-blue;
+          }
+        }
         .intro{
-          //background: red;
+          &__text-container{
+            @include media-query(lg){
+              @include full-height();
+              @include center-vh();
+            }
+            @include media-query-min-max(null, $screen-lg){
+              @include center-v();
+            }
+          }
+          &__text{
+            padding: $base-gap-larger 0;
+            color: $color-dark-est;
+          }
         }
         .clients{
-          //background: blue;
+
         }
         .skills{
           //background: mediumpurple;
         }
         .contact{
           //background: yellowgreen;
+        }
+      }
+      .footer{
+        @include transition();
+        background: $color-dark-est;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: $footer-height;
+        &.footer_collapsed{
+          height: 0;
+        }
+        .footer__wrapper{
+          @include full-height();
+          position: relative;
+          .footer__handler{
+            background-color: $color-dark-est;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            left: calc(50% - 20px);
+            @include font-size($font-size-xs);
+            color: $color-white;
+            top: -10px;
+            height: 10px;
+            width: 40px;
+            border-radius: 5px 5px 0 0;
+          }
         }
       }
     }
