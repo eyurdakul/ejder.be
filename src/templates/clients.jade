@@ -5,9 +5,16 @@ include mixins
             .generic__image-container
                 +svg-image("Projects")
         .col-sm-12.col-lg-6
-            .intro__text-container
-                .intro__text-wrapper
-                    h1.intro__header qsd
-                    h3.intro__sub-header qsdsqd
-                    p.intro__text qsdqs
-                    .intro__additional-info(ng-bind-html="data.summary")
+            .clients__title-wrapper
+                h1.generic__header {{::data.title}}
+                h3.generic__sub-header {{::data.summary}}
+            .clients__container
+                .row.no-gutters.visible-xs(ng-repeat="client in data.clients")
+                    .col-xs-12
+                        project-info(client="client")
+                .row.no-gutters.visible-sm(ng-repeat="clients in data.clients | chunk:2")
+                    .col-sm-6(ng-repeat="client in clients")
+                        project-info(client="client")
+                .row.no-gutters.visible-md.visible-lg(ng-repeat="clients in data.clients | chunk:3")
+                    .col-md-4.col-lg-4(ng-repeat="client in clients")
+                        project-info(client="client")

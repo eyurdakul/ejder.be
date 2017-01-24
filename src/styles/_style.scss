@@ -169,6 +169,16 @@ html{
               @include center-v();
             }
           }
+          &__header{
+            color: $color-orange;
+            @include font-size($font-size-huge);
+            font-family: DosisBold;
+          }
+          &__sub-header{
+            @include font-size($font-size-xl);
+            padding: $base-gap-larger 0;
+            color: $color-blue;
+          }
         }
         .intro{
           &__text-container{
@@ -180,23 +190,13 @@ html{
               @include center-v();
             }
           }
-          &__header{
-            color: $color-orange;
-            @include font-size($font-size-huge);
-            font-family: DosisBold;
-          }
-          &__sub-header{
-            @include font-size($font-size-xl);
-            padding: $base-gap-larger 0;
-            color: $color-blue;
-          }
           &__text{
             padding: $base-gap-larger 0;
             color: $color-dark-est;
           }
         }
         .clients{
-          //background: blue;
+
         }
         .skills{
           //background: mediumpurple;

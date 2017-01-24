@@ -16,9 +16,21 @@ app.service "SpinnerService", SpinnerService
 
 #factories
 app.factory "ErrorLogFactory", ErrorLogFactory
+app.factory "lodash", ["$window", ($window)->
+  $window._
+]
+
+#filters
+app.filter "chunk", ["lodash", (_)->
+  _.memoize (arr, size)->
+    _.chunk arr, size
+  , (arr, size)->
+    JSON.stringify(arr) + size
+]
 
 #directives
 app.directive "loadingModal", LoadingModalDirective
+app.directive "projectInfo", ProjectInfoDirective
 
 app.provider "$exceptionHandler",
   $get: ["ErrorLogFactory", (ErrorLogFactory)->

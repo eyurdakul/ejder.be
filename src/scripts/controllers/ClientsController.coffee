@@ -2,9 +2,10 @@
 ClientsController = [
   "$scope"
   "$log"
+  "$filter"
   "ContentProviderService"
   "SpinnerService"
-  ($scope, $log, ContentProviderService, SpinnerService)->
+  ($scope, $log, $filter, ContentProviderService, SpinnerService)->
 
     $log.debug "Creating ClientsController"
 
@@ -17,7 +18,6 @@ ClientsController = [
       true
 
     handleData = (response)->
-      console.log response
       $scope.data = response
       SpinnerService.setLoading false
 

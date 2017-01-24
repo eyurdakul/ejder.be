@@ -7,7 +7,7 @@ include mixins
         .col-sm-12.col-lg-6
             .intro__text-container
                 .intro__text-wrapper
-                    h1.intro__header {{::data.name}}
-                    h3.intro__sub-header {{::data.title}}
+                    h1.generic__header {{::data.name}}
+                    h3.generic__sub-header {{::data.title}}
                     p.intro__text {{data.moreabout}}
                     .intro__additional-info(ng-bind-html="data.summary")
