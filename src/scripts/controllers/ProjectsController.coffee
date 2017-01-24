@@ -1,5 +1,5 @@
 "use strict"
-ClientsController = [
+ProjectsController = [
   "$scope"
   "$log"
   "$filter"
@@ -7,13 +7,13 @@ ClientsController = [
   "SpinnerService"
   ($scope, $log, $filter, ContentProviderService, SpinnerService)->
 
-    $log.debug "Creating ClientsController"
+    $log.debug "Creating ProjectsController"
 
     $scope.data = undefined
 
     $scope.init = ->
       SpinnerService.setLoading true
-      ContentProviderService.get("clients")
+      ContentProviderService.get("projects")
       .then handleData, null, handleData
       true
 

@@ -1,0 +1,20 @@
+include mixins
+.container-fluid.projects(ng-init="init()")
+    .row.generic__wrapper
+        .col-sm-12.col-lg-6
+            .generic__image-container
+                +svg-image("Projects")
+        .col-sm-12.col-lg-6
+            .projects__title-wrapper
+                h1.generic__header {{::data.title}}
+                h3.generic__sub-header {{::data.summary}}
+            .projects__container
+                .row.no-gutters.visible-xs(ng-repeat="project in data.projects")
+                    .col-xs-12
+                        project-info(project="project")
+                .row.no-gutters.visible-sm(ng-repeat="projects in data.projects | chunk:2")
+                    .col-sm-6(ng-repeat="project in projects")
+                        project-info(project="project")
+                .row.no-gutters.visible-md.visible-lg(ng-repeat="projects in data.projects | chunk:3")
+                    .col-md-4.col-lg-4(ng-repeat="project in projects")
+                        project-info(project="project")
