@@ -1,0 +1,15 @@
+include mixins
+.container-fluid.projects(ng-init="init()")
+    .row.generic__wrapper
+        .col-sm-12.col-lg-6
+            .generic__image-container
+                +svg-image("Projects")
+        .col-sm-12.col-lg-6
+            .projects__title-wrapper
+                h1.generic__header {{::data.title}}
+                h3.generic__sub-header {{::data.summary}}
+            .projects__container.no-gutters
+                project-info(
+                    ng-repeat="project in data.projects"
+                    project="project"
+                    )

@@ -7,9 +7,8 @@ ProjectInfoDirective = ["$log", ($log)->
   transclude: false
   replace: true
   scope:
-    client: "=client"
+    project: "=project"
   templateUrl: "directive/ProjectInfoTemplate.html"
   link: (scope, elem, attrs)->
-    scope.image = scope.client.image
-    $log.debug scope.client
+    scope.image = scope.project.image
 ]

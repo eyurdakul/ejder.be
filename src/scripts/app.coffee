@@ -5,7 +5,7 @@ app = angular.module "EjderBe", ["ngRoute", "ui.bootstrap", "ngAnimate", "ngSani
 app.controller "NavigationController", NavigationController
 app.controller "FooterController", FooterController
 app.controller "IntroController", IntroController
-app.controller "ClientsController", ClientsController
+app.controller "ProjectsController", ProjectsController
 app.controller "SkillsController", SkillsController
 app.controller "ContactController", ContactController
 
@@ -42,9 +42,9 @@ app.config ["$routeProvider", ($routeProvider)->
   .when "/intro",
     templateUrl: "load/intro"
     controller: "IntroController"
-  .when "/clients",
-    templateUrl: "load/clients"
-    controller: "ClientsController"
+  .when "/projects",
+    templateUrl: "load/projects"
+    controller: "ProjectsController"
   .when "/skills",
     templateUrl: "load/skills"
     controller: "SkillsController"
