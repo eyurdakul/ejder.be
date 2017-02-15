@@ -13,7 +13,6 @@ html{
         text-decoration: none;
       }
     }
-
     .loading{
       background-color: $color-blue;
       @include center-vh();
@@ -171,16 +170,17 @@ html{
           }
           &__header{
             color: $color-orange;
-            @include font-size($font-size-huge);
+            @include font-size-by-view($font-size-header);
             font-family: DosisBold;
           }
           &__sub-header{
-            @include font-size($font-size-xl);
+            @include font-size-by-view($font-size-sub-header);
             padding: $base-gap-larger 0;
             color: $color-blue;
           }
         }
         .intro{
+          max-width: 100%;
           &__text-container{
             @include media-query(lg){
               @include full-height();
@@ -196,7 +196,46 @@ html{
           }
         }
         .projects{
-
+          max-width: 100%;
+          .projects__container{
+            .project-info{
+              &__wrapper {
+                background-size: cover;
+                width: 33%;
+                padding-bottom: 33%;
+                position: relative;
+                float: left;
+                overflow: hidden;
+                &:hover > .project-info__modal {
+                  opacity: 0.6;
+                }
+                &:hover > .project-info__title-wrapper {
+                  top: 0;
+                }
+              }
+              &__modal{
+                @include fill-parent();
+                @include transition();
+                z-index: $top-of-own-container;
+                background-color: $color-white;
+                opacity: 0;
+              }
+              &__title-wrapper{
+                @include center-vh();
+                @include wh();
+                @include transition();
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: $top-of-own-container;
+                h4{
+                  color: $color-orange;
+                  @include font-size($font-size-xl);
+                  font-family: DosisBold;
+                }
+              }
+            }
+          }
         }
         .skills{
           //background: mediumpurple;

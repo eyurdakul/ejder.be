@@ -55,15 +55,6 @@
       "technologies": [
         {"name":"Angular", "icon":"angular"}
       ]
-    },
-    {
-      "name": "KBC",
-      "project": "KBC Touch",
-      "image":"/frontend/media/content/field.png",
-      "description": "KBC Touch is an online banking application",
-      "technologies": [
-        {"name":"Angular", "icon":"angular"}
-      ]
     }
   ]
 }
