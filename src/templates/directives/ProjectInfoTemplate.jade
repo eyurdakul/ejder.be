@@ -1,4 +1,17 @@
 include ../mixins
-.project-info__wrapper
-   img.project-info__image(ng-src="{{image}}")
-
+.project-info__wrapper(style="background-image: url('{{project.image}}')")
+   .project-info__modal
+   .project-info__title-wrapper
+      h4 KBC Touch
+      p.project-info__description {{project.description}}
+      .project-info__technologies.hidden-xs
+         +devicon("{{technology.icon}}")(ng-repeat="technology in project.technologies")
+   a.project-info__more-info-mobile.hidden-md.hidden-lg(
+         href="javascript:void(0)"
+         ng-click="moreInfo()"
+      )
+   a.project-info__more-info.hidden-xs.hidden-sm(
+         href="javascript:void(0)"
+         ng-click="moreInfo()"
+      )
+      +glyph("plus")
