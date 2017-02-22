@@ -7,8 +7,11 @@
       "project": "KBC Touch",
       "image":"/frontend/media/content/field.png",
       "description": "KBC Touch is an online banking application",
+      "long_description": "KBC Touch is an online banking application. KBC Touch is an online banking application.",
       "technologies": [
-        {"name":"Angular", "icon":"angular"}
+        {"name":"Angular", "icon":"angularjs"},
+        {"name":"Angular", "icon":"angularjs"},
+        {"name":"Angular", "icon":"angularjs"}
       ]
     },
     {
@@ -17,7 +20,7 @@
       "image":"/frontend/media/content/field.png",
       "description": "KBC Touch is an online banking application",
       "technologies": [
-        {"name":"Angular", "icon":"angular"}
+        {"name":"Angular", "icon":"angularjs"}
       ]
     },
     {
@@ -26,7 +29,7 @@
       "image":"/frontend/media/content/field.png",
       "description": "KBC Touch is an online banking application",
       "technologies": [
-        {"name":"Angular", "icon":"angular"}
+        {"name":"Angular", "icon":"angularjs"}
       ]
     },
     {
@@ -35,7 +38,7 @@
       "image":"/frontend/media/content/field.png",
       "description": "KBC Touch is an online banking application",
       "technologies": [
-        {"name":"Angular", "icon":"angular"}
+        {"name":"Angular", "icon":"angularjs"}
       ]
     },
     {
@@ -44,7 +47,7 @@
       "image":"/frontend/media/content/field.png",
       "description": "KBC Touch is an online banking application",
       "technologies": [
-        {"name":"Angular", "icon":"angular"}
+        {"name":"Angular", "icon":"angularjs"}
       ]
     },
     {
@@ -53,7 +56,7 @@
       "image":"/frontend/media/content/field.png",
       "description": "KBC Touch is an online banking application",
       "technologies": [
-        {"name":"Angular", "icon":"angular"}
+        {"name":"Angular", "icon":"angularjs"}
       ]
     }
   ]

@@ -10,5 +10,7 @@ ProjectInfoDirective = ["$log", ($log)->
     project: "=project"
   templateUrl: "directive/ProjectInfoTemplate.html"
   link: (scope, elem, attrs)->
-    scope.image = scope.project.image
+    scope.moreInfo = ->
+      $log.debug "yeah"
+    true
 ]

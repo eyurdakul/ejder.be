@@ -9,7 +9,7 @@ html{
       @include transition();
 
       &:hover {
-        opacity: 0.5;
+        opacity: 0.6;
         text-decoration: none;
       }
     }
@@ -207,16 +207,18 @@ html{
                 float: left;
                 overflow: hidden;
                 &:hover > .project-info__modal {
-                  opacity: 0.6;
+                  opacity: 0.8;
                 }
                 &:hover > .project-info__title-wrapper {
                   top: 0;
+                }
+                &:hover > .project-info__more-info {
+                  right: $base-gap-regular;
                 }
               }
               &__modal{
                 @include fill-parent();
                 @include transition();
-                z-index: $top-of-own-container;
                 background-color: $color-white;
                 opacity: 0;
               }
@@ -224,14 +226,52 @@ html{
                 @include center-vh();
                 @include wh();
                 @include transition();
+                flex-direction: column;
                 position: absolute;
                 top: 100%;
                 left: 0;
-                z-index: $top-of-own-container;
+                padding: $base-gap-regular;
                 h4{
                   color: $color-orange;
                   @include font-size($font-size-xl);
+                  @include media-query(xs){
+                    @include font-size($font-size-l);
+                  }
                   font-family: DosisBold;
+                }
+              }
+              &__description{
+                text-align: center;
+                color: $color-blue;
+                @include font-size($font-size-l);
+                @include media-query(xs){
+                  @include font-size($font-size-m);
+                }
+              }
+              &__technologies{
+                padding-top: $base-gap-regular;
+                color: $color-orange;
+                i{
+                  padding: 0 $base-gap-micro;
+                }
+              }
+              &__more-info-mobile{
+                @include fill-parent();
+              }
+              &__more-info{
+                position: absolute;
+                bottom: $base-gap-regular;
+                right: -80px;
+                color: $color-blue;
+                i{
+                  color: $color-orange;
+                  @include font-size($font-size-s);
+                  &:after{
+                    @include font-size($font-size-l);
+                    content: $content-more;
+                    font-family: DosisBold;
+                    color: $color-blue;
+                  }
                 }
               }
             }

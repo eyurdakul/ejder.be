@@ -20,6 +20,12 @@ mixin glyph(iconName)
         aria-hidden="true"
     )
 
+mixin devicon(iconName)
+    i&attributes(attributes)(
+        class="devicon-"+iconName+"-plain"
+        aria-hidden="true"
+    )
+
 mixin svg-image(svgName)
     object.img-responsive.auto-scale-to-parent&attributes(attributes)(
         type="image/svg+xml"

@@ -26,9 +26,9 @@
   font-size: $sizeValue + rem;
   line-height: $lineValue + rem;
 }
-@mixin font-size-by-view($sizeValue: 1.6) {
-  font-size: $sizeValue + vh;
-  line-height: ($sizeValue * 1.025) + vh;
+@mixin font-size-by-view($sizeValue: 1.6, $unit: vh) {
+  font-size: $sizeValue + $unit;
+  line-height: ($sizeValue * 1.025) + $unit;
 }
 @mixin full-height(){
   min-height: 100%;
