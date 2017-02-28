@@ -111,7 +111,7 @@ module.exports = (grunt)->
         options:
           directory: "./bower_components"
     exec:
-      start_server: "forever start backend/server.js"
+      start_server: "forever start -l ./logs/forever.log -o ./logs/out.log -e ./logs/err.log backend/server.js"
       restart_server: "forever restart backend/server.js"
       stop_server: "forever stopall"
 
