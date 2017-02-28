@@ -13,6 +13,7 @@ app.controller "ContactController", ContactController
 app.service "ContentProviderService", ContentProviderService
 app.service "SocketService", SocketService
 app.service "SpinnerService", SpinnerService
+app.service "ProjectDetailService", ProjectDetailService
 
 #factories
 app.factory "ErrorLogFactory", ErrorLogFactory
@@ -31,6 +32,9 @@ app.filter "chunk", ["lodash", (_)->
 #directives
 app.directive "loadingModal", LoadingModalDirective
 app.directive "projectInfo", ProjectInfoDirective
+app.directive "projectDetail", ProjectDetailDirective
+
+
 
 app.provider "$exceptionHandler",
   $get: ["ErrorLogFactory", (ErrorLogFactory)->

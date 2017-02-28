@@ -1,5 +1,5 @@
 "use strict"
-ProjectInfoDirective = ["$log", ($log)->
+ProjectInfoDirective = ["$log", "ProjectDetailService", ($log, ProjectDetailService)->
 
   $log.debug "Creating ProjectInfoDirective"
 
@@ -11,6 +11,6 @@ ProjectInfoDirective = ["$log", ($log)->
   templateUrl: "directive/ProjectInfoTemplate.html"
   link: (scope, elem, attrs)->
     scope.moreInfo = ->
-      $log.debug "yeah"
+      ProjectDetailService.setProject scope.project
     true
 ]
