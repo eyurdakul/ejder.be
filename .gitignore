@@ -6,5 +6,7 @@ forever
 frontend
 backend
 assets
-dev
-error.log
+/logs/console.log
+/logs/err.log
+/logs/out.log
+/dev
