@@ -4,5 +4,8 @@ bower_components
 .sass-cache
 frontend
 backend
-dev
-error.log
+assets
+/logs/console.log
+/logs/err.log
+/logs/out.log
+/dev

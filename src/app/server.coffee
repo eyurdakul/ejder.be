@@ -1,5 +1,4 @@
 express = require "express"
-http = require "http"
 jade = require "jade"
 fs = require "fs"
 
@@ -14,7 +13,7 @@ class Bootstrap
     isDev: "#{__dirname}/../dev"
     contentPath: "#{__dirname}/../frontend"
     libraryPath: "#{__dirname}/../bower_components"
-    port: 8080
+    port: 80
     socketPort: 400
     status:
       notFound: 404
@@ -24,16 +23,6 @@ class Bootstrap
     _self = @
     @isDev = fs.existsSync @options.isDev
     @app = express()
-
-    @server = http.Server @app
-    @server.listen @options.socketPort
-    @io = require("socket.io")(@server)
-    @socketConnector = require("./live.js")
-
-    @logger = require("./logger.js")
-    @logger.init @isDev
-
-    @socketConnector.init @io
 
     @app.use "/frontend", express.static(@options.contentPath)
     @app.use "/bower_components", express.static(@options.libraryPath)
@@ -60,7 +49,15 @@ class Bootstrap
           isDev : _self.isDev
           request: request
       response.render "404", appData
-    @app.listen @options.port
+
+    @server = @app.listen @options.port
+    @io = require("socket.io").listen @server
+
+    @logger = require("./logger.js")
+    @logger.init @isDev
+
+    @socketConnector = require("./live.js")
+    @socketConnector.init @io
 
   @
 
