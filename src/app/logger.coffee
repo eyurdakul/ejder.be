@@ -4,7 +4,7 @@ class Logger
   _self = undefined
 
   isDev: undefined
-  logFile: "../error.log"
+  logFile: "./logs/console.log"
   CONSTANTS:
     LOG_DEBUG: "debug"
     LOG_WARNING: "warn"

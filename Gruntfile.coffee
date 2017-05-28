@@ -1,5 +1,10 @@
 path = require "path"
+
 module.exports = (grunt)->
+
+  isDev = grunt.cli.tasks?[0]? is "dev"
+  forever_options = if isDev then "-d -v" else "-a -o ./logs/out.log -e ./logs/err.log"
+
   grunt.initConfig
     pkg: grunt.file.readJSON "package.json"
     watch:
@@ -111,8 +116,8 @@ module.exports = (grunt)->
         options:
           directory: "./bower_components"
     exec:
-      start_server: "forever start -l ./logs/forever.log -o ./logs/out.log -e ./logs/err.log backend/server.js"
-      restart_server: "forever restart backend/server.js"
+      start_server: "forever start "+forever_options+" backend/server.js"
+      restart_server: "forever restart "+forever_options+" backend/server.js"
       stop_server: "forever stopall"
 
   grunt.loadNpmTasks "grunt-contrib-clean"
