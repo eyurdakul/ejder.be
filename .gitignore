@@ -1,8 +1,7 @@
-.idea/
+.idea
 node_modules
 bower_components
 .sass-cache
-forever
 frontend
 backend
 assets
