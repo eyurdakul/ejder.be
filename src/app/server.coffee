@@ -13,8 +13,7 @@ class Bootstrap
     isDev: "#{__dirname}/../dev"
     contentPath: "#{__dirname}/../frontend"
     libraryPath: "#{__dirname}/../bower_components"
-    port: 80
-    socketPort: 400
+    port: 8080
     status:
       notFound: 404
   isDev: undefined
