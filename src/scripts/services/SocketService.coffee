@@ -4,11 +4,9 @@ SocketService = ["$log", ($log)->
   $log.debug "Creating SocketService"
 
   CONSTANTS =
-    connectionPort: ":400"
-    protocolSuffix: "//"
     eventConnected: "connectionEstablished"
 
-  socket = io.connect(location.protocol+CONSTANTS.protocolSuffix+location.hostname+CONSTANTS.connectionPort)
+  socket = io.connect "/"
   socket.on CONSTANTS.eventConnected, (data)->
     $log.debug "Connection is established with the socket.io server on: "+data.datetime
 
