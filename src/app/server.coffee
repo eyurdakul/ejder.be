@@ -8,6 +8,7 @@ class Bootstrap
     DEFAULT_PATH: "/"
     TEMPLATE_PATH: "/load/:view"
     DIRECTIVE_PATH: "/directive/:template"
+    SOCKET_PATH: "/socket.io/"
   options:
     templatePath: "#{__dirname}/../src/templates"
     isDev: "#{__dirname}/../dev"
@@ -25,6 +26,7 @@ class Bootstrap
 
     @app.use "/frontend", express.static(@options.contentPath)
     @app.use "/bower_components", express.static(@options.libraryPath)
+    @app.use @routes.SOCKET_PATH, express.static(@routes.SOCKET_PATH)
     @app.set "views", @options.templatePath
     @app.set "view engine", "jade"
     @app.engine "jade", jade.__express
