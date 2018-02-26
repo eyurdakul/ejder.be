@@ -2,7 +2,7 @@ path = require "path"
 
 module.exports = (grunt)->
 
-  isDev = grunt.cli.tasks?[0]? is "dev"
+  isDev = grunt.cli.tasks[0] is "dev"
   forever_options = if isDev then "-d -v" else "-a -o ./logs/out.log -e ./logs/err.log"
 
   grunt.initConfig
@@ -24,12 +24,13 @@ module.exports = (grunt)->
         files: ["#{__dirname}/src/media/**/*.*"]
         tasks: ["clean:media", "copy:media"]
     clean:
+      all: ["#{__dirname}/frontend/*", "#{__dirname}/backend/*"]
       style: ["#{__dirname}/frontend/styles/*"]
       script:
         front: ["#{__dirname}/frontend/scripts/*"]
         back: ["#{__dirname}/backend/*"]
       media: ["#{__dirname}/frontend/media/*"]
-      sources: ["#{__dirname}/frontend/styles/*.css", "#{__dirname}/frontend/scripts/all.js"]
+      sources: ["#{__dirname}/frontend/styles/*.css", "#{__dirname}/frontend/scripts/all.js", "!#{__dirname}/frontend/styles/svg-only.css", "!#{__dirname}/frontend/styles/main.min.css"]
     copy:
       build:
         files: [
@@ -99,7 +100,7 @@ module.exports = (grunt)->
     cssmin:
       build:
         files:
-          "frontend/styles/min/main.min.css": ["#{__dirname}/frontend/styles/*.css"]
+          "frontend/styles/main.min.css": ["#{__dirname}/frontend/styles/*.css", "!#{__dirname}/frontend/styles/svg-only.css"]
     uglify:
       build:
         files: [
@@ -131,6 +132,14 @@ module.exports = (grunt)->
   grunt.loadNpmTasks "grunt-coffeelint"
   grunt.loadNpmTasks "grunt-exec"
 
-  grunt.registerTask "dev", ["exec:stop_server", "coffeelint", "clean", "copy", "coffee", "compass", "wiredep", "exec:start_server", "watch"]
-  grunt.registerTask "dist", ["exec:stop_server", "clean", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "clean:sources", "exec:start_server"]
+  grunt.registerTask "setEnv", "Switching to DEV environment", ->
+    grunt.file.delete "dev" if grunt.file.exists "dev"
+    console.log isDev
+    console.log grunt.cli.tasks[0]
+    if isDev
+      console.log "DEV ENV"
+      grunt.file.write "dev", "The existence of this file indicates the environment and ignored by git"
+
+  grunt.registerTask "dev", ["setEnv", "exec:stop_server", "coffeelint", "clean:all", "copy", "coffee", "compass", "wiredep", "exec:start_server", "watch"]
+  grunt.registerTask "dist", ["setEnv", "exec:stop_server", "clean:all", "copy", "coffee", "compass", "cssmin", "uglify", "wiredep", "clean:sources", "exec:start_server"]
   return
